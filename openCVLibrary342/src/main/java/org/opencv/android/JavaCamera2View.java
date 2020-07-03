@@ -3,6 +3,7 @@ package org.opencv.android;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.ImageFormat;
@@ -36,7 +37,7 @@ import org.opencv.imgproc.Imgproc;
  * converted to RGBA32 and then passed to the external callback for modifications if required.
  */
 
-@android.support.annotation.RequiresApi(api = android.os.Build.VERSION_CODES.LOLLIPOP)
+@TargetApi(21)
 public class JavaCamera2View extends CameraBridgeViewBase {
 
     private static final String LOGTAG = "JavaCamera2View";
@@ -83,6 +84,7 @@ public class JavaCamera2View extends CameraBridgeViewBase {
         }
     }
 
+    @SuppressLint("MissingPermission")
     protected boolean initializeCamera() {
         Log.i(LOGTAG, "initializeCamera");
         CameraManager manager = (CameraManager) getContext().getSystemService(Context.CAMERA_SERVICE);
@@ -112,7 +114,7 @@ public class JavaCamera2View extends CameraBridgeViewBase {
                 manager.openCamera(mCameraID, mStateCallback, mBackgroundHandler);
             }
             return true;
-        } catch (CameraAccessException e) {
+        } catch (@SuppressLint("NewApi") CameraAccessException e) {
             Log.e(LOGTAG, "OpenCamera - Camera Access Exception", e);
         } catch (IllegalArgumentException e) {
             Log.e(LOGTAG, "OpenCamera - Illegal Argument Exception", e);
@@ -222,7 +224,7 @@ public class JavaCamera2View extends CameraBridgeViewBase {
                 },
                 null
             );
-        } catch (CameraAccessException e) {
+        } catch (@SuppressLint("NewApi") CameraAccessException e) {
             Log.e(LOGTAG, "createCameraPreviewSession", e);
         }
     }
@@ -281,7 +283,7 @@ public class JavaCamera2View extends CameraBridgeViewBase {
                 mPreviewSize = new android.util.Size(bestWidth, bestHeight);
                 return true;
             }
-        } catch (CameraAccessException e) {
+        } catch (@SuppressLint("NewApi") CameraAccessException e) {
             Log.e(LOGTAG, "calcPreviewSize - Camera Access Exception", e);
         } catch (IllegalArgumentException e) {
             Log.e(LOGTAG, "calcPreviewSize - Illegal Argument Exception", e);
