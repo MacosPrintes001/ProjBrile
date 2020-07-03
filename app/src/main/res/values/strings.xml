@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjBrile</string>
+    <string name="Gallery">Gallery</string>
+    <string name="Apply">apply</string>
 </resources>
