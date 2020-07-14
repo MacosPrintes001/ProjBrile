@@ -40,8 +40,9 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
 
     ImageView mImageView;
-    Button mGalerryBtn, mApllyBtn;
+    Button mGalerryBtn, mApllyBtn, clearBtn;
     Bitmap grayBitMap, imgBitMap;
+    String texto;
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
@@ -96,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        clearBtn = findViewById(R.id.btnClear);
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testClear();
+            }
+        });
+
     }
 
     public void pickImageGallery(){
@@ -115,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 pickImageGallery();
             } else {
                 //permission was Denied
-                Toast.makeText(this, "Permission denied, pleace Allow the permission", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "A permissão está desativada, por favor aceite-a para poder continuar", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -145,152 +154,171 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void cornvertToGray(){
-        if (imgBitMap == null){ //se nenhuma imagem selecionada
-
-            Toast.makeText(this, "ImageView is emprety, pleace select an image", Toast.LENGTH_SHORT ).show();
-
-        }else {// tem imagem hora de trabalhar
-            Mat Rgba = new Mat();
-            Mat grayMat = new Mat();
-
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inDither = false;
-            o.inSampleSize = 4;
-
-            int width = imgBitMap.getWidth();
-            int height = imgBitMap.getHeight();
-
-            grayBitMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-
-            //BitMap to mat
-            Utils.bitmapToMat(imgBitMap, Rgba);
-
-            //Gray Scale
-            Imgproc.cvtColor(Rgba, grayMat, Imgproc.COLOR_RGB2GRAY);
-
-            //ThresHold(Limiarização)
-            Imgproc.threshold(grayMat, grayMat, 233, 255, Imgproc.THRESH_BINARY_INV);
-
-            //Median Filter(Filtro de Mediana/Morfologia)
-            Imgproc.medianBlur(grayMat, grayMat, 3);
-
-            //Dilate
-            Imgproc.dilate(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 2)));
-
-            //Erode
-            Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 1)));
-
-            //Toast.makeText(this, "The image was loaded", Toast.LENGTH_SHORT ).show();
-
-            // find contours (Acha o contorno dos circulos)
-            List<MatOfPoint> countours = new ArrayList<>();
-            Mat hierarchy = new Mat();
-            Imgproc.findContours(grayMat, countours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-
-            //Find centroids (acha p centro de cada circulo e coloca em X(coluna) Y(Linha))
-            ArrayList<Integer> arrayX = new ArrayList<>();
-            ArrayList<Integer> arrayY = new ArrayList<>();
-            List<Moments> mu = new ArrayList<>();
-
-            for (int i = 0; i < countours.size(); i++) {
-
-                mu.add(i, Imgproc.moments(countours.get(i), true));
-                Moments p = mu.get(i);
-                int x = (int) (p.get_m10() / p.get_m00());
-                int y = (int) (p.get_m01() / p.get_m00());
-                arrayX.add(x);
-                arrayY.add(y);
-            }
-
-            int[][] centroids = new int[arrayX.size()][2];
-            for (int i = 0; i < arrayX.size(); i++){
-                centroids[i][0] = arrayX.get(i);
-                centroids[i][1] = arrayY.get(i);
-            }
-
-            //draw lines
-            Collections.sort(arrayX);
-            Collections.sort(arrayY);
-
-            Set<Integer> xSemRepetir = new LinkedHashSet<>(arrayX);
-
-            Set<Integer> ySemRepetir = new LinkedHashSet<>(arrayY);
-
-            Integer[] arrayXSemRep = new Integer[xSemRepetir.size()];
-            xSemRepetir.toArray(arrayXSemRep);
-
-            Integer[] arrayYSemRep = new Integer[ySemRepetir.size()];
-            ySemRepetir.toArray(arrayYSemRep);
-
-            ArrayList<Integer> index_col = new ArrayList<>();
-            index_col.add(0);
-            Integer contadorAntesX = 0;
-            for (Integer integer : arrayXSemRep) {
-                if (integer > contadorAntesX) {
-                    Imgproc.line(grayMat, new Point(integer + 6, 0), new Point(integer + 6, 1800), new Scalar(130, 0, 0)); //fazer colunas
-                    contadorAntesX = integer + 6;
-                    index_col.add(contadorAntesX);
-                }
-            }
-
-            ArrayList<Integer> index_lin = new ArrayList<>();
-            index_lin.add(0);
-            Integer contadorAntesY = 0;
-            for (Integer integer : arrayYSemRep) {
-                if (integer > contadorAntesY) {
-                    Imgproc.line(grayMat, new Point(0, integer + 6), new Point(900, integer + 6), new Scalar(130, 0, 0)); //fazer linhas
-                    contadorAntesY = integer + 6;
-                    index_lin.add(contadorAntesY);
-                }
-            }
-
-            //Recognition of word
-            String flag="0";
-            for(int i=0; i<=(index_lin.size()-3); i=i+3) {
-                for (int j = 0; j < (index_col.size() - 2); j += 2) {
-
-                    int[] Vlinha = new int[4];
-                    int[] Vcoluna = new int[3];
-                    int[] Vletra = {0, 0, 0, 0, 0, 0};
-
-                    int m = 0, cnt = 0;
-                    for(int p = i; p<=(i+3); p++) {
-                        Vlinha[m] = index_lin.get(p);
-                        m++;
-                    }
-                    int n=0;
-                    for(int t = j; t<= (j+2); t++) {
-                        Vcoluna[n] = index_col.get(t);
-                        n++;
-                    }
-
-                    for(m=0; m<(Vcoluna.length)-1; m++) {
-                        for(n=0; n<(Vlinha.length)-1; n++) {
-
-                            //pointCentroids Centroids = new pointCentroids();
-                            //int [][] centroids = Centroids.Centroids();
-
-                            for(int k=0; k<centroids.length; k++ ) {
-                                if(centroids[k][0] >= Vcoluna[m] && centroids[k][0] <= Vcoluna[m+1] && centroids[k][1] >= Vlinha[n] && centroids[k][1] <= Vlinha[n+1]) {                                    //centroids[0][k] >= Vcoluna[m] && centroids[0][k] <= Vcoluna[m+1] && centroids[1][k] >= Vlinha[n] && centroids[1][k] <= Vlinha[n+1]){
-                                    Vletra[cnt] = 1;
-                                }
-                            }
-                            cnt = cnt+1;
-                        }
-                    }
-
-                    bdLetra carac = new bdLetra();
-                    String[] letra = carac.letraBD(Vletra, flag);
-                    System.out.println(letra[0]);
-                    flag = letra[1];
-
-                }
-            }
-
-            Utils.matToBitmap(grayMat, grayBitMap);
-            //set to the Imageview
-            mImageView.setImageBitmap(grayBitMap);
+    private void testClear() {
+        if (imgBitMap == null){
+            Toast.makeText(getApplicationContext(), "O imageview já está vazio", Toast.LENGTH_SHORT).show();
+        }else {
+            imgBitMap = null;
+            mImageView.setImageBitmap(imgBitMap);
         }
     }
+
+    public void cornvertToGray() {
+        try {
+            if (imgBitMap == null) { //se nenhuma imagem selecionada
+
+                Toast.makeText(this, "ImageView esta vazio, por favor selecione uma imagem", Toast.LENGTH_SHORT).show();
+
+            } else {// tem imagem hora de trabalhar
+                Mat Rgba = new Mat();
+                Mat grayMat = new Mat();
+
+                BitmapFactory.Options o = new BitmapFactory.Options();
+                o.inDither = false;
+                o.inSampleSize = 4;
+
+                int width = imgBitMap.getWidth();
+                int height = imgBitMap.getHeight();
+
+                grayBitMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+
+                //BitMap to mat
+                Utils.bitmapToMat(imgBitMap, Rgba);
+
+                //Gray Scale
+                Imgproc.cvtColor(Rgba, grayMat, Imgproc.COLOR_RGB2GRAY);
+
+                //ThresHold(Limiarização)
+                Imgproc.threshold(grayMat, grayMat, 233, 255, Imgproc.THRESH_BINARY_INV);
+
+                //Median Filter(Filtro de Mediana/Morfologia)
+                Imgproc.medianBlur(grayMat, grayMat, 2);
+
+                //Erode
+                Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 1)));
+
+                //Dilate
+                Imgproc.dilate(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 2)));
+
+                //Toast.makeText(this, "The image was loaded", Toast.LENGTH_SHORT ).show();
+
+                // find contours (Acha o contorno dos circulos)
+                List<MatOfPoint> countours = new ArrayList<>();
+                Mat hierarchy = new Mat();
+                Imgproc.findContours(grayMat, countours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+                //Find centroids (acha p centro de cada circulo e coloca em X(coluna) Y(Linha))
+                ArrayList<Integer> arrayX = new ArrayList<>();
+                ArrayList<Integer> arrayY = new ArrayList<>();
+                List<Moments> mu = new ArrayList<>();
+
+                for (int i = 0; i < countours.size(); i++) {
+
+                    mu.add(i, Imgproc.moments(countours.get(i), true));
+                    Moments p = mu.get(i);
+                    int x = (int) (p.get_m10() / p.get_m00());
+                    int y = (int) (p.get_m01() / p.get_m00());
+                    arrayX.add(x);
+                    arrayY.add(y);
+                }
+
+                int[][] centroids = new int[arrayX.size()][2];
+                for (int i = 0; i < arrayX.size(); i++) {
+                    centroids[i][0] = arrayX.get(i);
+                    centroids[i][1] = arrayY.get(i);
+                }
+
+                //draw lines
+                Collections.sort(arrayX);
+                Collections.sort(arrayY);
+
+                Set<Integer> xSemRepetir = new LinkedHashSet<>(arrayX);
+
+                Set<Integer> ySemRepetir = new LinkedHashSet<>(arrayY);
+
+                Integer[] arrayXSemRep = new Integer[xSemRepetir.size()];
+                xSemRepetir.toArray(arrayXSemRep);
+
+                Integer[] arrayYSemRep = new Integer[ySemRepetir.size()];
+                ySemRepetir.toArray(arrayYSemRep);
+
+                ArrayList<Integer> index_col = new ArrayList<>();
+                index_col.add(0);
+                Integer contadorAntesX = 0;
+                for (Integer integer : arrayXSemRep) {
+                    if (integer > contadorAntesX) {
+                        Imgproc.line(grayMat, new Point(integer + 6, 0), new Point(integer + 6, 1800), new Scalar(130, 0, 0)); //fazer colunas
+                        contadorAntesX = integer + 6;
+                        index_col.add(contadorAntesX);
+                    }
+                }
+
+                ArrayList<Integer> index_lin = new ArrayList<>();
+                index_lin.add(0);
+                Integer contadorAntesY = 0;
+                for (Integer integer : arrayYSemRep) {
+                    if (integer > contadorAntesY) {
+                        Imgproc.line(grayMat, new Point(0, integer + 6), new Point(900, integer + 6), new Scalar(130, 0, 0)); //fazer linhas
+                        contadorAntesY = integer + 6;
+                        index_lin.add(contadorAntesY);
+                    }
+                }
+
+                //Recognition of word
+                String flag = "0";
+
+                for (int i = 0; i <= (index_lin.size() - 3); i = i + 3) {
+                    for (int j = 0; j < (index_col.size() - 2); j += 2) {
+
+                        int[] Vlinha = new int[4];
+                        int[] Vcoluna = new int[3];
+                        int[] Vletra = {0, 0, 0, 0, 0, 0};
+
+                        int m = 0, cnt = 0;
+                        for (int p = i; p <= (i + 3); p++) {
+                            Vlinha[m] = index_lin.get(p);
+                            m++;
+                        }
+                        int n = 0;
+                        for (int t = j; t <= (j + 2); t++) {
+                            Vcoluna[n] = index_col.get(t);
+                            n++;
+                        }
+
+                        for (m = 0; m < (Vcoluna.length) - 1; m++) {
+                            for (n = 0; n < (Vlinha.length) - 1; n++) {
+                                for (int k = 0; k < centroids.length; k++) {
+                                    if (centroids[k][0] >= Vcoluna[m] && centroids[k][0] <= Vcoluna[m + 1] && centroids[k][1] >= Vlinha[n] && centroids[k][1] <= Vlinha[n + 1]) {                                    //centroids[0][k] >= Vcoluna[m] && centroids[0][k] <= Vcoluna[m+1] && centroids[1][k] >= Vlinha[n] && centroids[1][k] <= Vlinha[n+1]){
+                                        Vletra[cnt] = 1;
+                                    }
+                                }
+                                cnt = cnt + 1;
+                            }
+                        }
+
+                        bdLetra carac = new bdLetra();
+                        String[] letra = carac.letraBD(Vletra, flag);
+                        //System.out.println(letra[0]);
+                        texto = texto+letra[0];
+                        flag = letra[1];
+                    }
+                }
+
+                Utils.matToBitmap(grayMat, grayBitMap);
+                //set to the Imageview
+                mImageView.setImageBitmap(grayBitMap);
+
+
+                Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
+                Bundle enviaTraducao = new Bundle();
+                enviaTraducao.putString("string_texto", texto);
+                intentEnviadora.putExtras(enviaTraducao);
+                startActivity(intentEnviadora);
+            }
+
+        } catch (Exception p) {
+            p.printStackTrace();
+        }
+    }
+
 }

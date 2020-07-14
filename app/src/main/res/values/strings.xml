@@ -2,4 +2,5 @@
     <string name="app_name">ProjBrile</string>
     <string name="Gallery">Gallery</string>
     <string name="Apply">apply</string>
+    <string name="alertText">ImageView is emprety, pleace select an image</string>
 </resources>
