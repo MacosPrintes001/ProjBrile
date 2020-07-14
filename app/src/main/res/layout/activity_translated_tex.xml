@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tom"
+        android:text="@string/tom"
         android:textSize="16sp" />
     <SeekBar
         android:id="@+id/seek_bar_pitch"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Velocidade"
+        android:text="@string/velocidade"
         android:textSize="16sp" />
     <SeekBar
         android:id="@+id/seek_bar_speed"
@@ -41,6 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:enabled="false"
-        android:text="Ouvir" />
+        android:text="@string/ouvir" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

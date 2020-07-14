@@ -3,4 +3,7 @@
     <string name="Gallery">Gallery</string>
     <string name="Apply">apply</string>
     <string name="alertText">ImageView is emprety, pleace select an image</string>
+    <string name="tom">Tom</string>
+    <string name="velocidade">Velocidade</string>
+    <string name="ouvir">Ouvir</string>
 </resources>
