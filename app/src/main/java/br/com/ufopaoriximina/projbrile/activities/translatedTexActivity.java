@@ -24,7 +24,7 @@ public class translatedTexActivity extends AppCompatActivity {
     private TextView txtTraduced;
     private Button mButtonSpeak;
     private String recebeTxt;
-
+    //AA
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
