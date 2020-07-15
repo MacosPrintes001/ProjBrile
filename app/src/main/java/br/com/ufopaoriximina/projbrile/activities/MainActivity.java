@@ -1,6 +1,7 @@
 package br.com.ufopaoriximina.projbrile.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.opencv.android.OpenCVLoader;
@@ -37,6 +39,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.ufopaoriximina.projbrile.R;
+import br.com.ufopaoriximina.projbrile.config.Permissoes;
 import br.com.ufopaoriximina.projbrile.config.bdLetra;
 
 
@@ -46,16 +49,19 @@ public class MainActivity extends AppCompatActivity {
     Button mGalerryBtn, mApllyBtn, clearBtn;
     Bitmap grayBitMap, imgBitMap;
     String texto;
-//
+    private  String[] permissoesNecessarias = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Permissoes.validarPermissoes(permissoesNecessarias, this, 1);
         OpenCVLoader.initDebug();
 
         mImageView = findViewById(R.id.imageView);
@@ -118,18 +124,30 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, IMAGE_PICK_CODE);
     }
 
-    //handle result of runtime permissions
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //permission was granted
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (int permissaoResultado: grantResults){
+            if(permissaoResultado == PackageManager.PERMISSION_DENIED){
+                alertaValidacaoPermissao();
+            }else if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 pickImageGallery();
-            } else {
-                //permission was Denied
-                Toast.makeText(this, "A permissão está desativada, por favor aceite-a para poder continuar", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void alertaValidacaoPermissao(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permissões Negadas!");
+        builder.setMessage("Para utilizar o aplicativo é necessário aceitar as permissões");
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override //carrega a imagem para a tela
