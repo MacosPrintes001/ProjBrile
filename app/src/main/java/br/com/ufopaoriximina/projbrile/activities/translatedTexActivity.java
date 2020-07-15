@@ -1,4 +1,4 @@
-package br.com.ufopaoriximina.projbrile;
+package br.com.ufopaoriximina.projbrile.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import br.com.ufopaoriximina.projbrile.R;
 
 public class translatedTexActivity extends AppCompatActivity {
 

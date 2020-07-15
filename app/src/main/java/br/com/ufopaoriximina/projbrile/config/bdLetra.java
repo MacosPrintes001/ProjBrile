@@ -1,4 +1,4 @@
-package br.com.ufopaoriximina.projbrile;
+package br.com.ufopaoriximina.projbrile.config;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package br.com.ufopaoriximina.projbrile;
+package br.com.ufopaoriximina.projbrile.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -35,6 +35,9 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import br.com.ufopaoriximina.projbrile.R;
+import br.com.ufopaoriximina.projbrile.config.bdLetra;
 
 
 public class MainActivity extends AppCompatActivity {
