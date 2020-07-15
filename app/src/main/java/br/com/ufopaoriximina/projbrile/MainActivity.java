@@ -192,10 +192,10 @@ public class MainActivity extends AppCompatActivity {
                 Imgproc.threshold(grayMat, grayMat, 233, 255, Imgproc.THRESH_BINARY_INV);
 
                 //Median Filter(Filtro de Mediana/Morfologia)
-                Imgproc.medianBlur(grayMat, grayMat, 2);
+                Imgproc.medianBlur(grayMat, grayMat, 3);
 
                 //Erode
-                Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 1)));
+                Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 2)));
 
                 //Dilate
                 Imgproc.dilate(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 2)));
