@@ -235,11 +235,9 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
 
                 for (int i = 0; i <= (index_lin.size() - 3); i = i + 3) {
                     for (int j = 0; j < (index_col.size() - 2); j += 2) {
-
                         int[] Vlinha = new int[4];
                         int[] Vcoluna = new int[3];
                         int[] Vletra = {0, 0, 0, 0, 0, 0};
-
                         int m = 0, cnt = 0;
                         for (int p = i; p <= (i + 3); p++) {
                             Vlinha[m] = index_lin.get(p);
@@ -250,7 +248,6 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                             Vcoluna[n] = index_col.get(t);
                             n++;
                         }
-
                         for (m = 0; m < (Vcoluna.length) - 1; m++) {
                             for (n = 0; n < (Vlinha.length) - 1; n++) {
                                 for (int k = 0; k < centroids.length; k++) {
@@ -264,7 +261,6 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
 
                         bdLetra carac = new bdLetra();
                         String[] letra = carac.letraBD(Vletra, flag);
-                        //System.out.println(letra[0]);
                         texto = texto+letra[0];
                         flag = letra[1];
                     }
