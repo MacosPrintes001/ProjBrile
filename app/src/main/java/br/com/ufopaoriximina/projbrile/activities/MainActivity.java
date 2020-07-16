@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.ufopaoriximina.projbrile.R;
-import br.com.ufopaoriximina.projbrile.config.Permissoes;
+import br.com.ufopaoriximina.projbrile.helper.Permissoes;
 import br.com.ufopaoriximina.projbrile.config.bdLetra;
 
 

@@ -1,4 +1,4 @@
-package br.com.ufopaoriximina.projbrile.config;
+package br.com.ufopaoriximina.projbrile.helper;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

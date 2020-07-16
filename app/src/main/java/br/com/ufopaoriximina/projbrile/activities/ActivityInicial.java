@@ -1,5 +1,11 @@
 package br.com.ufopaoriximina.projbrile.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,28 +16,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
 import br.com.ufopaoriximina.projbrile.R;
-import br.com.ufopaoriximina.projbrile.config.Permissoes;
+import br.com.ufopaoriximina.projbrile.helper.Permissoes;
 
 public class ActivityInicial extends AppCompatActivity {
 
-
     private  String[] permissoesNecessarias = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.CAMERA,  Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     ImageView imagemCarregada;
     Button startTranslate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_inicial);
         carregarComponentes();
         Permissoes.validarPermissoes(permissoesNecessarias, this, 1);
         startTranslate.setOnClickListener(new View.OnClickListener() {
