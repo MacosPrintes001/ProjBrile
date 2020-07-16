@@ -221,8 +221,6 @@ public class MainActivity extends AppCompatActivity {
                 //Dilate
                 Imgproc.dilate(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 2)));
 
-                //Toast.makeText(this, "The image was loaded", Toast.LENGTH_SHORT ).show();
-
                 // find contours (Acha o contorno dos circulos)
                 List<MatOfPoint> countours = new ArrayList<>();
                 Mat hierarchy = new Mat();
@@ -327,8 +325,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Utils.matToBitmap(grayMat, grayBitMap);
                 //set to the Imageview
-                mImageView.setImageBitmap(grayBitMap);
-
 
                 Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
                 Bundle enviaTraducao = new Bundle();
