@@ -37,6 +37,24 @@
         app:layout_constraintTop_toTopOf="@+id/imageCarregada"
         app:layout_constraintVertical_bias="0.702" />
 
+    <Button
+        android:id="@+id/startAprendizado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_traduzir"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Aprendizagem"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageCarregada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/startTranslate"
+        app:layout_constraintVertical_bias="0.216" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

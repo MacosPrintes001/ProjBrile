@@ -75,10 +75,9 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(imgBitMap == null){
-                    Toast.makeText(getApplicationContext(),"Você não selecionou nenhuma imagem.", Toast.LENGTH_SHORT).show();
+                    imagemVazia();
                 }else{
                     convertImage();
-                    Toast.makeText(getApplicationContext(),"Selecionou.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -267,15 +266,34 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                 }
                 Utils.matToBitmap(grayMat, grayBitMap);
                 //set to the Imageview
-                img.setImageBitmap(grayBitMap);
                 Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
                 Bundle enviaTraducao = new Bundle();
                 enviaTraducao.putString("string_texto", texto);
                 intentEnviadora.putExtras(enviaTraducao);
                 startActivity(intentEnviadora);
+                finish();
             }
         }catch (Exception e){
             Log.d("Erro", e.getMessage());
         }
+    }
+
+    private void imagemVazia(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Você não selecionou nenhum imagem!");
+        builder.setCancelable(false);
+        builder.setMessage("Volte ao menu Inicial e selecione uma imagem");
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(getApplicationContext(), ActivityInicial.class);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
+                        , R.transition.fade_in, R.transition.fade_out);
+                ActivityCompat.startActivity(ActivityEdicaoImagem.this, i, activityOptionsCompat.toBundle());
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
