@@ -19,8 +19,6 @@ import br.com.ufopaoriximina.projbrile.R;
 public class translatedTexActivity extends AppCompatActivity {
 
     private TextToSpeech mTTS;
-    private SeekBar mSeekBarPitch;
-    private SeekBar mSeekBarSpeed;
     private TextView txtTraduced;
     private Button mButtonSpeak;
     private String recebeTxt;
@@ -36,12 +34,12 @@ public class translatedTexActivity extends AppCompatActivity {
 
 
         mButtonSpeak = findViewById(R.id.button_speak);
-        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+        mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
                 if (i == TextToSpeech.SUCCESS) {
-                    int result = mTTS.setLanguage(Locale.ENGLISH);
-                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    int lingua = mTTS.setLanguage(Locale.getDefault());
+                    if (lingua == TextToSpeech.LANG_MISSING_DATA || lingua == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supported");
                     } else {
                         mButtonSpeak.setEnabled(true);
@@ -54,8 +52,6 @@ public class translatedTexActivity extends AppCompatActivity {
 
         txtTraduced = findViewById(R.id.textView);
         txtTraduced.setText(recebeTxt);
-        mSeekBarPitch = findViewById(R.id.seek_bar_pitch);
-        mSeekBarSpeed = findViewById(R.id.seek_bar_speed);
 
         mButtonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,14 +62,11 @@ public class translatedTexActivity extends AppCompatActivity {
     }
 
     private void speak() {
-        String text = txtTraduced.getText().toString();
-        float pitch = (float) mSeekBarPitch.getProgress() / 50;
-        if (pitch < 0.1) pitch = 0.1f;
-        float speed = (float) mSeekBarSpeed.getProgress() / 50;
-        if (speed < 0.1) speed = 0.1f;
-        mTTS.setPitch(pitch);
-        mTTS.setSpeechRate(speed);
-        mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        //pega o valor do TextView
+        String s = txtTraduced.getText().toString();
+        //convete para fala
+        int speech = mTTS.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+
     }
     @Override
     protected void onDestroy() {

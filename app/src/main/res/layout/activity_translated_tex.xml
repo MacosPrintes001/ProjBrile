@@ -16,27 +16,7 @@
         android:layout_marginBottom="16dp"
         android:hint="Tradução"
         tools:ignore="HardcodedText" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tom"
-        android:textSize="16sp" />
-    <SeekBar
-        android:id="@+id/seek_bar_pitch"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:progress="50" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/velocidade"
-        android:textSize="16sp" />
-    <SeekBar
-        android:id="@+id/seek_bar_speed"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:progress="50" />
+
     <Button
         android:id="@+id/button_speak"
         android:layout_width="wrap_content"
