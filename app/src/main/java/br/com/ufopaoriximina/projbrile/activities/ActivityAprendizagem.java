@@ -1,8 +1,12 @@
 package br.com.ufopaoriximina.projbrile.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -188,6 +192,20 @@ public class ActivityAprendizagem extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //Handle the back button
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent i = new Intent(getApplicationContext(),ActivityInicial.class);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
+                    , R.transition.fade_in, R.transition.fade_out);
+            ActivityCompat.startActivity(ActivityAprendizagem.this, i, activityOptionsCompat.toBundle());
+            finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
     private void carregarComponentes(){
