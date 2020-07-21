@@ -26,7 +26,7 @@ public class ActivityInicial extends AppCompatActivity {
             Manifest.permission.CAMERA,  Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     ImageView imagemCarregada;
-    Button startTranslate;
+    Button startTranslate, startAprendizagem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +43,23 @@ public class ActivityInicial extends AppCompatActivity {
                 finish();
             }
         });
+
+        startAprendizagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ActivityAprendizagem.class);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
+                        , R.transition.fade_in, R.transition.fade_out);
+                ActivityCompat.startActivity(ActivityInicial.this, i, activityOptionsCompat.toBundle());
+                finish();
+            }
+        });
     }
 
     public void carregarComponentes(){
         imagemCarregada = findViewById(R.id.imageCarregada);
         startTranslate = findViewById(R.id.startTranslate);
+        startAprendizagem = findViewById(R.id.startAprendizado);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
