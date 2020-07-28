@@ -32,7 +32,7 @@ public class translatedTexActivity extends AppCompatActivity {
         Bundle recebeTraducao = intentRecebedora.getExtras();
         recebeTxt = recebeTraducao.getString("string_texto");
 
-
+        
         mButtonSpeak = findViewById(R.id.button_speak);
         mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -76,4 +76,5 @@ public class translatedTexActivity extends AppCompatActivity {
         }
         super.onDestroy();
     }
+
 }

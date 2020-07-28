@@ -46,13 +46,12 @@
         <ImageView
             android:id="@+id/imagemRecuperada"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="531dp"
             android:layout_centerInParent="true"
             android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
     </LinearLayout>
 </ScrollView>
