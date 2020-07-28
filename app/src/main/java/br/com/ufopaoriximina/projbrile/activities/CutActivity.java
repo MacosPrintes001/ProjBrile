@@ -1,4 +1,4 @@
-package br.com.ufopaoriximina.projbrile;
+package br.com.ufopaoriximina.projbrile.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+
+import br.com.ufopaoriximina.projbrile.R;
 
 public class CutActivity extends AppCompatActivity {
     private ImageView view;
