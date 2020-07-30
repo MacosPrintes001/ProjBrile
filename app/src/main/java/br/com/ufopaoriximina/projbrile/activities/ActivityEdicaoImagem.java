@@ -125,7 +125,7 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
         alert.show();
     }
     private void init(){
-        this.img = findViewById(R.id.imagemRecuperada);
+        this.img = findViewById(R.id.view);
         cancelar = findViewById(R.id.imagemCancelEdition);
         concluir = findViewById(R.id.imagemConcluirEdition);
     }

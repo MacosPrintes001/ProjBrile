@@ -36,7 +36,7 @@ public class ActivityInicial extends AppCompatActivity {
         startTranslate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ActivityEdicaoImagem.class);
+                Intent i = new Intent(getApplicationContext(), CutActivity.class);
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
                         , R.transition.fade_in, R.transition.fade_out);
                 ActivityCompat.startActivity(ActivityInicial.this, i, activityOptionsCompat.toBundle());

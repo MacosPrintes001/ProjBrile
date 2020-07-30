@@ -1,17 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:fillViewport="true"
     android:layout_height="match_parent"
-    tools:context=".activities.CutActivity">
-
-
-    <ImageView
-        android:id="@+id/imageView"
+    android:layout_width="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+        tools:context=".activity.ActivityEdicaoImage"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imagemCancelEdition"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="4dp"
+                app:srcCompat="@drawable/ic_cancel_black_24dp"
+                tools:layout_editor_absoluteX="371dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ImageView
+                android:id="@+id/imagemConcluirEdition"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="320dp"
+
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                tools:layout_editor_absoluteX="371dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+        </Toolbar>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="531dp"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@color/colorPrimary"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/observacaoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:text="Clique na área em verde para carregar uma imagem"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>

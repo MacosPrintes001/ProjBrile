@@ -44,7 +44,7 @@
         </Toolbar>
 
         <ImageView
-            android:id="@+id/imagemRecuperada"
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="531dp"
             android:layout_centerInParent="true"

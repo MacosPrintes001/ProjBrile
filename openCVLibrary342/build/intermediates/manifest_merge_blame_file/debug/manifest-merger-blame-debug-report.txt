@@ -5,10 +5,10 @@
 5    android:versionName="3.4.2" >
 6
 7    <uses-sdk
-7-->C:\Users\usuario\AndroidStudioProjects\ProjBrile\openCVLibrary342\src\main\AndroidManifest.xml:7:6-48
+7-->D:\projetos android\ProjBrile\openCVLibrary342\src\main\AndroidManifest.xml:7:6-48
 8        android:minSdkVersion="8"
-8-->C:\Users\usuario\AndroidStudioProjects\ProjBrile\openCVLibrary342\src\main\AndroidManifest.xml:7:6-48
+8-->D:\projetos android\ProjBrile\openCVLibrary342\src\main\AndroidManifest.xml:7:6-48
 9        android:targetSdkVersion="28" />
-9-->C:\Users\usuario\AndroidStudioProjects\ProjBrile\openCVLibrary342\src\main\AndroidManifest.xml:7:16-45
+9-->D:\projetos android\ProjBrile\openCVLibrary342\src\main\AndroidManifest.xml:7:16-45
 10
 11</manifest>
