@@ -19,10 +19,29 @@
 
     <Button
         android:id="@+id/button_speak"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="32dp"
+
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_btn_traduzir"
         android:enabled="false"
-        android:text="@string/ouvir" />
+        android:text="@string/ouvir"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_btn_traduzir"
+        android:enabled="false"
+        android:text="Enviar Tradução"
+        android:textColor="@color/colorAccent" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

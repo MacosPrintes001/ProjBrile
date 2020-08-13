@@ -22,18 +22,21 @@ public class translatedTexActivity extends AppCompatActivity {
     private TextView txtTraduced;
     private Button mButtonSpeak;
     private String recebeTxt;
+    private Button sendText;
     //AA
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translated_tex);
+        init();
 
         Intent intentRecebedora = getIntent();
         Bundle recebeTraducao = intentRecebedora.getExtras();
-        recebeTxt = recebeTraducao.getString("string_texto");
+        if(recebeTraducao != null){
+            recebeTxt = recebeTraducao.getString("string_texto");
+        }
 
-        
-        mButtonSpeak = findViewById(R.id.button_speak);
+
         mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -50,7 +53,7 @@ public class translatedTexActivity extends AppCompatActivity {
             }
         });
 
-        txtTraduced = findViewById(R.id.textView);
+
         txtTraduced.setText(recebeTxt);
 
         mButtonSpeak.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +62,11 @@ public class translatedTexActivity extends AppCompatActivity {
                 speak();
             }
         });
+    }
+
+    private void init(){
+        txtTraduced = findViewById(R.id.textView);
+        mButtonSpeak = findViewById(R.id.button_speak);
     }
 
     private void speak() {
