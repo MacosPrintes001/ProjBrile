@@ -25,13 +25,13 @@ public class ActivityInicial extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,  Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-    ImageView imagemCarregada;
     Button startTranslate, startAprendizagem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
         carregarComponentes();
+        getSupportActionBar().hide();
         Permissoes.validarPermissoes(permissoesNecessarias, this, 1);
         startTranslate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,6 @@ public class ActivityInicial extends AppCompatActivity {
     }
 
     public void carregarComponentes(){
-        imagemCarregada = findViewById(R.id.imageCarregada);
         startTranslate = findViewById(R.id.startTranslate);
         startAprendizagem = findViewById(R.id.startAprendizado);
     }
