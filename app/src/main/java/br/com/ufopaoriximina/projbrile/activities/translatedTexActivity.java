@@ -8,12 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.Locale;
-
 import br.com.ufopaoriximina.projbrile.R;
 
 public class translatedTexActivity extends AppCompatActivity {
@@ -30,13 +28,12 @@ public class translatedTexActivity extends AppCompatActivity {
         setContentView(R.layout.activity_translated_tex);
         init();
 
+
         Intent intentRecebedora = getIntent();
         Bundle recebeTraducao = intentRecebedora.getExtras();
         if(recebeTraducao != null){
             recebeTxt = recebeTraducao.getString("string_texto");
         }
-
-
         mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -62,13 +59,33 @@ public class translatedTexActivity extends AppCompatActivity {
                 speak();
             }
         });
+        sendText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getBaseContext(), "Clicado", Toast.LENGTH_SHORT).show();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Tradução: " + "\n\n" + txtTraduced.getText());
+                sendIntent.putExtra(Intent.EXTRA_TITLE, "Tradução Feita no App Muiraputã - Braile");
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, "Escolha por onde enviar:");
+                startActivity(shareIntent);
+
+            }
+        });
+
     }
 
-    private void init(){
+    public void init(){
         txtTraduced = findViewById(R.id.textView);
         mButtonSpeak = findViewById(R.id.button_speak);
+        sendText = findViewById(R.id.button_send_tradu);
     }
 
+    public void setSendText(){
+
+    }
     private void speak() {
         //pega o valor do TextView
         String s = txtTraduced.getText().toString();
