@@ -1,44 +1,55 @@
-package br.com.ufopaoriximina.projbrile.activities;
+package br.com.ufopaoriximina.projbrile.activities.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
+
+import androidx.fragment.app.Fragment;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-
 import br.com.ufopaoriximina.projbrile.R;
-import br.com.ufopaoriximina.projbrile.activities.fragments.FragmentAprendAlfabeto;
-import br.com.ufopaoriximina.projbrile.activities.fragments.FragmentAprendNumero;
 
-public class ActivityAprendizagem extends AppCompatActivity implements FragmentAprendAlfabeto.OnFragmentInteractionListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link FragmentAprendAlfabeto.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the  factory method to
+ * create an instance of this fragment.
+ */
+public class FragmentAprendAlfabeto extends Fragment {
 
-    private EditText informacao;
+    private EditText letraInfor;
     private ImageView letra;
-    private Button btnCarregar;
+    public FragmentAprendAlfabeto() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aprendizagem);
-        getSupportActionBar().setElevation(0);
-        getSupportActionBar().setTitle("Aprendizagem");
-        /*carregarComponentes();
-        //informacao.;
-        btnCarregar.setOnClickListener(new View.OnClickListener() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_fragment_aprend_alfabeto, container, false);
+        letraInfor = view.findViewById(R.id.textoInformacao);
+        letra = view.findViewById(R.id.imageViewLetra);
+        letraInfor.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                switch (informacao.getText().toString()){
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                switch (letraInfor.getText().toString()){
                     case "a":
                         letra.setImageResource(R.drawable.letra_a);
                         break;
@@ -200,45 +211,18 @@ public class ActivityAprendizagem extends AppCompatActivity implements FragmentA
                         break;
                 }
             }
-        });*/
 
-        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
-                getSupportFragmentManager(),
-                FragmentPagerItems.with(this)
-                        .add("Alfabeto", FragmentAprendAlfabeto.class)
-                        .add("Palavras", FragmentAprendAlfabeto.class)
-                        .add("Números", FragmentAprendNumero.class)
-                        .add("Expressões", FragmentAprendAlfabeto.class)
-                        .create()
-        );
-        ViewPager viewPager = findViewById(R.id.viewpager2);
-        viewPager.setAdapter( adapter );
-        SmartTabLayout viewPagerTab = findViewById(R.id.smartTabLayout);
-        viewPagerTab.setViewPager( viewPager );
+            @Override
+            public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        return view;
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //Handle the back button
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent i = new Intent(getApplicationContext(),ActivityInicial.class);
-            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
-                    , R.transition.fade_in, R.transition.fade_out);
-            ActivityCompat.startActivity(ActivityAprendizagem.this, i, activityOptionsCompat.toBundle());
-            finish();
-            return true;
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
-
-    private void carregarComponentes(){
-        informacao = findViewById(R.id.textoInformacao);
-        letra = findViewById(R.id.imageViewLetra);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }

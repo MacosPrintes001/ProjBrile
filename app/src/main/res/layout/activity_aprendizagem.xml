@@ -6,46 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".activities.ActivityAprendizagem">
 
-    <EditText
-        android:id="@+id/textoInformacao"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="60dp"
-        android:maxLength="1"
-        android:hint="Digite uma letra"
-        android:inputType="textPersonName"
+    <com.ogaclejapan.smarttablayout.SmartTabLayout
+        android:id="@+id/smartTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:foregroundGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLetra" />
-
-    <ImageView
-        android:adjustViewBounds="true"
-        android:id="@+id/imageViewLetra"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/test" />
+        app:stl_clickable="true"
+        app:stl_defaultTabBackground="?attr/selectableItemBackground"
+        app:stl_defaultTabTextAllCaps="true"
+        app:stl_defaultTabTextColor="#fff"
+        app:stl_defaultTabTextHorizontalPadding="19dp"
+        app:stl_defaultTabTextMinWidth="1dp"
+        app:stl_defaultTabTextSize="14sp"
+        app:stl_distributeEvenly="false"
+        app:stl_dividerColor="@android:color/transparent"
+        app:stl_dividerThickness="2dp"
+        app:stl_drawDecorationAfterTab="false"
+        app:stl_indicatorAlwaysInCenter="false"
+        app:stl_indicatorColor="#FFF"
+        app:stl_indicatorCornerRadius="2dp"
+        app:stl_indicatorGravity="bottom"
+        app:stl_indicatorInFront="false"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorThickness="4dp"
+        app:stl_indicatorWidth="auto"
+        app:stl_indicatorWithoutPadding="false"
+        app:stl_overlineColor="#4D000000"
+        app:stl_overlineThickness="0dp"
+        app:stl_titleOffset="24dp"
+        app:stl_underlineColor="#4D000000"
+        app:stl_underlineThickness="0.5dp" />
 
-    <Button
-        android:id="@+id/btnCarregarImagem"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:background="@drawable/bg_btn_traduzir"
-        android:text="Ver em Braile"
-        android:textColor="@android:color/white"
+        android:layout_height="0dp"
+        android:layout_below="@id/smartTabLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoInformacao" />
+        app:layout_constraintTop_toBottomOf="@+id/smartTabLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
