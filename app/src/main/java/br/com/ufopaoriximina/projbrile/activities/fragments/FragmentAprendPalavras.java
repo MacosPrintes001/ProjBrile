@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,15 @@ public class FragmentAprendPalavras extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                switch (editPalavra.getText().toString()){
+                String[] a =  editPalavra.getText().toString().split("");
+                //Toast.makeText(getContext(), a[a.length - 1], Toast.LENGTH_SHORT).show();
+
+                KeyEvent keyEvent;
+                int keyCode;
+
+
+                switch (a[a.length - 1]){
+
                     case "a":
                         imagens.add(R.drawable.letra_a);
                         break;
@@ -204,7 +213,8 @@ public class FragmentAprendPalavras extends Fragment {
                     case "Z":
                         imagens.add(R.drawable.letra_z_upper);
                         break;
-                    case " ":
+                    case " " :
+                        imagens.clear();
                         Toast.makeText(getContext(), "Espaço", Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -224,6 +234,8 @@ public class FragmentAprendPalavras extends Fragment {
         gridView.setAdapter(gridAdapter);
         return view;
     }
+
+
 
 
     public interface OnFragmentInteractionListener {
