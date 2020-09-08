@@ -14,9 +14,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import br.com.ufopaoriximina.projbrile.R;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.ActivityAprendizagem;
 import br.com.ufopaoriximina.projbrile.helper.Permissoes;
 
 public class ActivityInicial extends AppCompatActivity {

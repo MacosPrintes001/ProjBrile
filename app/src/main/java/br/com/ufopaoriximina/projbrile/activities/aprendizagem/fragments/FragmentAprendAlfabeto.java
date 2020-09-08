@@ -1,6 +1,5 @@
-package br.com.ufopaoriximina.projbrile.activities.fragments;
+package br.com.ufopaoriximina.projbrile.activities.aprendizagem.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -38,9 +36,13 @@ public class FragmentAprendAlfabeto extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //Recupera o view da pagina
         View view = inflater.inflate(R.layout.fragment_fragment_aprend_alfabeto, container, false);
+        //EditText do texto digitado
         letraInfor = view.findViewById(R.id.textoInformacao);
+        //ImageView para a letra
         letra = view.findViewById(R.id.imageViewLetra);
+        //Verifica a mudança dinamica dos dados
         letraInfor.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -49,6 +51,7 @@ public class FragmentAprendAlfabeto extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //Switch para verificar a letra digitada
                 switch (letraInfor.getText().toString()){
                     case "a":
                         letra.setImageResource(R.drawable.letra_a);

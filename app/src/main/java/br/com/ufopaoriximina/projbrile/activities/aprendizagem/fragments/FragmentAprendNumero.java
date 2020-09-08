@@ -1,6 +1,5 @@
-package br.com.ufopaoriximina.projbrile.activities.fragments;
+package br.com.ufopaoriximina.projbrile.activities.aprendizagem.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -30,9 +29,13 @@ public class FragmentAprendNumero extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //Recupera o view da pagina
         View view = inflater.inflate(R.layout.fragment_fragment_aprend_alfabeto, container, false);
+        //EditText do texto digitado
         letraInfor = view.findViewById(R.id.textoInformacao);
+        //ImageView para a número (Falta fazer)
         letra = view.findViewById(R.id.imageViewLetra);
+        //Verifica a mudança dinamica dos dados
         letraInfor.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -41,6 +44,7 @@ public class FragmentAprendNumero extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //Switch para verificar o número digitado (Falta terminar)
                 switch (letraInfor.getText().toString()){
                     case "0":
                         letra.setImageResource(R.drawable.n0);

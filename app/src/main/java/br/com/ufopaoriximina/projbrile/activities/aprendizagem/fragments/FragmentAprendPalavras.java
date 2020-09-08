@@ -1,6 +1,5 @@
-package br.com.ufopaoriximina.projbrile.activities.fragments;
+package br.com.ufopaoriximina.projbrile.activities.aprendizagem.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,7 +7,6 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.com.ufopaoriximina.projbrile.R;
-import br.com.ufopaoriximina.projbrile.adapters.GridAdapter;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
 
 public class FragmentAprendPalavras extends Fragment {
 
@@ -29,17 +27,24 @@ public class FragmentAprendPalavras extends Fragment {
         // Required empty public constructor
     }
 
+    //ArrayList das Imagens. Ver aprendizagem -> adapters -> GridAdapter
     ArrayList<Integer> imagens = new ArrayList<>();
+    //EditText da palavra
     EditText editPalavra;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        final View view = inflater.inflate(R.layout.fragment_fragment_aprend_palavras, container, false);
-        gridView = view.findViewById(R.id.gridViewPalavra);
+        //TODO: ESSA QUE ESTÁ COM PROBLEMAS GRAVES
 
+        //Recupera o View
+        final View view = inflater.inflate(R.layout.fragment_fragment_aprend_palavras, container, false);
+        //Criação da Grid View (Pesquisar)
+        gridView = view.findViewById(R.id.gridViewPalavra);
+        //Localização do ediText
         editPalavra = view.findViewById(R.id.textoInformacao);
+        //Recuperação das mudanças dinâmicas dos dados
         editPalavra.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -48,13 +53,15 @@ public class FragmentAprendPalavras extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //Tentativa de organizar um array de letras
                 String[] a =  editPalavra.getText().toString().split("");
                 Toast.makeText(getContext(), a[a.length - 1], Toast.LENGTH_SHORT).show();
 
-
+                //Verifica se o EditText está vazio
                 if(editPalavra.getText().toString().equals("")){
                     imagens.clear();
                 }
+                //Tenta ir inserindo no Array de Imagens do Grid Layout para aparecer a tradução
                 switch (a[a.length - 1]){
 
                     case "a":
@@ -232,6 +239,7 @@ public class FragmentAprendPalavras extends Fragment {
             }
         });
 
+        //Recupera e configura o GridAdapter usando a classe aprendizagem.adapters.GridAdapter
         GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
         gridView.setAdapter(gridAdapter);
         return view;
