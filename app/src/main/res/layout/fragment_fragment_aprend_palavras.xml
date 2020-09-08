@@ -10,6 +10,7 @@
         android:id="@+id/textoInformacao"
         android:layout_width="291dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Digite uma letra"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"

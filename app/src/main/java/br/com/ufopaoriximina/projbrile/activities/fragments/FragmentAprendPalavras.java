@@ -36,7 +36,7 @@ public class FragmentAprendPalavras extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_fragment_aprend_palavras, container, false);
+        final View view = inflater.inflate(R.layout.fragment_fragment_aprend_palavras, container, false);
         gridView = view.findViewById(R.id.gridViewPalavra);
 
         editPalavra = view.findViewById(R.id.textoInformacao);
@@ -49,12 +49,12 @@ public class FragmentAprendPalavras extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String[] a =  editPalavra.getText().toString().split("");
-                //Toast.makeText(getContext(), a[a.length - 1], Toast.LENGTH_SHORT).show();
-
-                KeyEvent keyEvent;
-                int keyCode;
+                Toast.makeText(getContext(), a[a.length - 1], Toast.LENGTH_SHORT).show();
 
 
+                if(editPalavra.getText().toString().equals("")){
+                    imagens.clear();
+                }
                 switch (a[a.length - 1]){
 
                     case "a":
@@ -221,6 +221,8 @@ public class FragmentAprendPalavras extends Fragment {
 
                         break;
                 }
+
+
 
             }
 
