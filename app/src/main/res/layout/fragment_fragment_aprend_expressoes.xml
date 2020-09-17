@@ -8,21 +8,20 @@
 
     <EditText
         android:id="@+id/textoInformacao"
-        android:layout_width="0dp"
+        android:layout_width="291dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="316dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Informe uma expressão matemática"
+        android:layout_marginTop="50dp"
+        android:hint="Digite uma palavra ou texto"
         android:inputType="textLongMessage|textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/apagarAll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra" />
 
     <GridView
         android:id="@+id/gridViewPalavra"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="70dp"
         android:gravity="center"
         android:numColumns="5"
@@ -31,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/apagarAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
