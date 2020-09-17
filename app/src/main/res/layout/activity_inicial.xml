@@ -32,8 +32,8 @@
 
         <Button
             android:id="@+id/startAprendizado"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="344dp"
+            android:layout_height="43dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/btn_bg_aprender_braile"

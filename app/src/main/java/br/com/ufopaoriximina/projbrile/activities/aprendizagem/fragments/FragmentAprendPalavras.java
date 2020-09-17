@@ -15,6 +15,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
@@ -55,15 +56,18 @@ public class FragmentAprendPalavras extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //Tentativa de organizar um array de letras
                 String[] a =  editPalavra.getText().toString().split("");
-                Toast.makeText(getContext(), a[a.length - 1], Toast.LENGTH_SHORT).show();
+                char[] b = charSequence.toString().toCharArray();
+                Toast.makeText(getContext(), a[a.length - 1] + "\nTamanho: " + a.length, Toast.LENGTH_SHORT).show();
 
                 //Verifica se o EditText está vazio
-                if(editPalavra.getText().toString().equals("")){
+                if(editPalavra.getText().toString().isEmpty()){
                     imagens.clear();
+
                 }
+
+
                 //Tenta ir inserindo no Array de Imagens do Grid Layout para aparecer a tradução
                 switch (a[a.length - 1]){
-
                     case "a":
                         imagens.add(R.drawable.letra_a);
                         break;
@@ -225,12 +229,8 @@ public class FragmentAprendPalavras extends Fragment {
                         Toast.makeText(getContext(), "Espaço", Toast.LENGTH_SHORT).show();
                         break;
                     default:
-
                         break;
                 }
-
-
-
             }
 
             @Override
