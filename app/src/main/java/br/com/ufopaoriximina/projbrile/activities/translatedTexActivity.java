@@ -1,16 +1,23 @@
 package br.com.ufopaoriximina.projbrile.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+
 import java.util.Locale;
 import br.com.ufopaoriximina.projbrile.R;
 
@@ -21,14 +28,20 @@ public class translatedTexActivity extends AppCompatActivity {
     private Button mButtonSpeak;
     private String recebeTxt;
     private Button sendText;
+    private ImageView retornar;
     //AA
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translated_tex);
+        getSupportActionBar().hide();
         init();
-
-
+        retornar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkExit();
+            }
+        });
         Intent intentRecebedora = getIntent();
         Bundle recebeTraducao = intentRecebedora.getExtras();
         if(recebeTraducao != null){
@@ -81,11 +94,48 @@ public class translatedTexActivity extends AppCompatActivity {
         txtTraduced = findViewById(R.id.textView);
         mButtonSpeak = findViewById(R.id.button_speak);
         sendText = findViewById(R.id.button_send_tradu);
+        retornar = findViewById(R.id.imagemReturnResult);
     }
 
     public void setSendText(){
 
     }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //Handle the back button
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            checkExit();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    private void checkExit()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Deseja realmente voltar?")
+                .setCancelable(false)
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), CutActivity.class);
+                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
+                                , R.transition.fade_in, R.transition.fade_out);
+                        ActivityCompat.startActivity(translatedTexActivity.this, i, activityOptionsCompat.toBundle());
+                        finish();
+
+                    }
+                })
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     private void speak() {
         //pega o valor do TextView
         String s = txtTraduced.getText().toString();
