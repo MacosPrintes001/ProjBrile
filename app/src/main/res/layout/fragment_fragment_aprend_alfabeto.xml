@@ -11,7 +11,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="144dp"
         android:layout_marginEnd="60dp"
         android:hint="Digite uma letra"
         android:inputType="textPersonName"
@@ -20,22 +19,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLetra"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra"
+        app:layout_constraintVertical_bias="0.409" />
 
-    <ImageView
-        android:id="@+id/imageViewLetra"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="60dp"
-        android:adjustViewBounds="true"
+    <GridView
+        android:id="@+id/gridViewPalavra"
+        android:layout_width="411dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="204dp"
+        android:gravity="center|center_vertical|center_horizontal"
+        android:numColumns="auto_fit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/test" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

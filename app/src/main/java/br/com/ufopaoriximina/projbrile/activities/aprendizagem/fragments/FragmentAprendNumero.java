@@ -30,7 +30,7 @@ public class FragmentAprendNumero extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //Recupera o view da pagina
-        View view = inflater.inflate(R.layout.fragment_fragment_aprend_alfabeto, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_aprend_numero, container, false);
         //EditText do texto digitado
         letraInfor = view.findViewById(R.id.textoInformacao);
         //ImageView para a número (Falta fazer)

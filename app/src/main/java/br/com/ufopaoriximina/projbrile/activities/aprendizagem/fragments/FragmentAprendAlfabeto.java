@@ -11,9 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 import br.com.ufopaoriximina.projbrile.R;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,9 +31,12 @@ import br.com.ufopaoriximina.projbrile.R;
 public class FragmentAprendAlfabeto extends Fragment {
 
     private EditText letraInfor;
-    private ImageView letra;
+    private ArrayList<Integer> imagens = new ArrayList<>();
+    private GridView gridView;
     public FragmentAprendAlfabeto() {
         // Required empty public constructor
+
+
     }
 
 
@@ -37,11 +45,14 @@ public class FragmentAprendAlfabeto extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //Recupera o view da pagina
-        View view = inflater.inflate(R.layout.fragment_fragment_aprend_alfabeto, container, false);
+        final View view = inflater.inflate(R.layout.fragment_fragment_aprend_alfabeto, container, false);
         //EditText do texto digitado
         letraInfor = view.findViewById(R.id.textoInformacao);
-        //ImageView para a letra
-        letra = view.findViewById(R.id.imageViewLetra);
+        //Grid View
+        gridView = view.findViewById(R.id.gridViewPalavra);
+        imagens.add(R.drawable.test);
+        GridAdapter2 gridAdapter = new GridAdapter2(view.getContext(), imagens);
+        gridView.setAdapter(gridAdapter);
         //Verifica a mudança dinamica dos dados
         letraInfor.addTextChangedListener(new TextWatcher() {
             @Override
@@ -54,165 +65,246 @@ public class FragmentAprendAlfabeto extends Fragment {
                 //Switch para verificar a letra digitada
                 switch (letraInfor.getText().toString()){
                     case "a":
-                        letra.setImageResource(R.drawable.letra_a);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_a);
                         break;
                     case "A":
-                        letra.setImageResource(R.drawable.letra_a_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_a);
                         break;
                     case "b":
-                        letra.setImageResource(R.drawable.letra_b);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_b);
                         break;
                     case "B":
-                        letra.setImageResource(R.drawable.letra_b_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_b);
                         break;
                     case "c":
-                        letra.setImageResource(R.drawable.letra_c);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_c);
                         break;
                     case "C":
-                        letra.setImageResource(R.drawable.letra_c_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_c);
                         break;
                     case "d":
-                        letra.setImageResource(R.drawable.letra_d);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_d);
                         break;
                     case "D":
-                        letra.setImageResource(R.drawable.letra_d_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_d);
                         break;
                     case "e":
-                        letra.setImageResource(R.drawable.letra_e);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_e);
                         break;
                     case "E":
-                        letra.setImageResource(R.drawable.letra_e_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_e);
                         break;
                     case "f":
-                        letra.setImageResource(R.drawable.letra_f);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_f);
                         break;
                     case "F":
-                        letra.setImageResource(R.drawable.letra_f_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_f);
                         break;
                     case "g":
-                        letra.setImageResource(R.drawable.letra_g);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_g);
                         break;
                     case "G":
-                        letra.setImageResource(R.drawable.letra_g_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_g);
                         break;
                     case "h":
-                        letra.setImageResource(R.drawable.letra_h);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_h);
                         break;
                     case "H":
-                        letra.setImageResource(R.drawable.letra_h_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_h);
                         break;
                     case "i":
-                        letra.setImageResource(R.drawable.letra_i);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_i);
                         break;
                     case "I":
-                        letra.setImageResource(R.drawable.letra_i_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_i);
                         break;
                     case "j":
-                        letra.setImageResource(R.drawable.letra_j);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_j);
                         break;
                     case "J":
-                        letra.setImageResource(R.drawable.letra_j_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_j);
                         break;
                     case "k":
-                        letra.setImageResource(R.drawable.letra_k);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_k);
                         break;
                     case "K":
-                        letra.setImageResource(R.drawable.letra_k_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_k);
                         break;
                     case "l":
-                        letra.setImageResource(R.drawable.letra_l);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_l);
                         break;
                     case "L":
-                        letra.setImageResource(R.drawable.letra_l_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_l);
                         break;
                     case "m":
-                        letra.setImageResource(R.drawable.letra_m);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_m);
                         break;
                     case "M":
-                        letra.setImageResource(R.drawable.letra_m_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_m);
                         break;
                     case "n":
-                        letra.setImageResource(R.drawable.letra_n);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_n);
                         break;
                     case "N":
-                        letra.setImageResource(R.drawable.letra_n_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_n);
                         break;
                     case "o":
-                        letra.setImageResource(R.drawable.letra_o);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_m);
                         break;
                     case "O":
-                        letra.setImageResource(R.drawable.letra_o_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_m);
                         break;
                     case "p":
-                        letra.setImageResource(R.drawable.letra_p);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_p);
                         break;
                     case "P":
-                        letra.setImageResource(R.drawable.letra_p_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_p);
                         break;
                     case "q":
-                        letra.setImageResource(R.drawable.letra_q);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_q);
                         break;
                     case "Q":
-                        letra.setImageResource(R.drawable.letra_q_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_q);
                         break;
                     case "r":
-                        letra.setImageResource(R.drawable.letra_r);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_r);
                         break;
                     case "R":
-                        letra.setImageResource(R.drawable.letra_r_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_r);
                         break;
                     case "s":
-                        letra.setImageResource(R.drawable.letra_s);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_s);
                         break;
                     case "S":
-                        letra.setImageResource(R.drawable.letra_s_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_s);
                         break;
                     case "t":
-                        letra.setImageResource(R.drawable.letra_t);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_t);
                         break;
                     case "T":
-                        letra.setImageResource(R.drawable.letra_t_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_t);
                         break;
                     case "u":
-                        letra.setImageResource(R.drawable.letra_u);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_u);
                         break;
                     case "U":
-                        letra.setImageResource(R.drawable.letra_u_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_u);
                         break;
                     case "v":
-                        letra.setImageResource(R.drawable.letra_v);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_v);
                         break;
                     case "V":
-                        letra.setImageResource(R.drawable.letra_v_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_v);
                         break;
                     case "w":
-                        letra.setImageResource(R.drawable.letra_w);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_w);
                         break;
                     case "W":
-                        letra.setImageResource(R.drawable.letra_w_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_w);
                         break;
                     case "x":
-                        letra.setImageResource(R.drawable.letra_x);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_x);
                         break;
                     case "X":
-                        letra.setImageResource(R.drawable.letra_x_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_x);
                         break;
                     case "y":
-                        letra.setImageResource(R.drawable.letra_y);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_y);
                         break;
                     case "Y":
-                        letra.setImageResource(R.drawable.letra_y_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_y);
                         break;
                     case "z":
-                        letra.setImageResource(R.drawable.letra_z);
+                        imagens.clear();
+                        imagens.add(R.drawable.letra_z);
                         break;
                     case "Z":
-                        letra.setImageResource(R.drawable.letra_z_upper);
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.letra_z);
                         break;
                     default:
-                        letra.setImageResource(R.drawable.test);
+                        imagens.clear();
+                        imagens.add(R.drawable.test);
                         break;
                 }
+                GridAdapter2 gridAdapter = new GridAdapter2(view.getContext(), imagens);
+                gridView.setAdapter(gridAdapter);
             }
 
             @Override
