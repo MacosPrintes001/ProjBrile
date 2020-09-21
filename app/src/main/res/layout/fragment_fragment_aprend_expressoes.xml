@@ -13,7 +13,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
         android:hint="Digite uma palavra ou texto"
-        android:inputType="textLongMessage|textPersonName"
+        android:inputType="number|numberDecimal|phone"
         app:layout_constraintEnd_toStartOf="@+id/apagarAll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra" />
@@ -21,10 +21,10 @@
     <GridView
         android:id="@+id/gridViewPalavra"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:gravity="center"
-        android:numColumns="5"
+        android:numColumns="6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
