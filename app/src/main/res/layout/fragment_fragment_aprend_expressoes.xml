@@ -13,7 +13,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
         android:hint="Digite uma palavra ou texto"
-        android:inputType="number|numberDecimal|phone"
+        android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/apagarAll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra" />

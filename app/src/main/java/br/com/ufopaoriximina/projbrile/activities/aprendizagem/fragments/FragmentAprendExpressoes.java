@@ -110,7 +110,34 @@ public class FragmentAprendExpressoes extends Fragment {
                             imagens.add(R.drawable.n9);
                             break;
                         case "+":
-                            imagens.add(R.drawable.n1);
+                            imagens.add(R.drawable.soma);
+                            break;
+                        case "-":
+                            imagens.add(R.drawable.subtracao);
+                            break;
+                        case "*":
+                            imagens.add(R.drawable.multiplicacao);
+                            break;
+                        case "/":
+                            imagens.add(R.drawable.divisao);
+                            break;
+                        case "^":
+                            imagens.add(R.drawable.expoente);
+                            break;
+                        case "(":
+                            imagens.add(R.drawable.abre);
+                            break;
+                        case ")":
+                            imagens.add(R.drawable.fecha);
+                            break;
+                        case "=":
+                            imagens.add(R.drawable.igualdade);
+                            break;
+                        case ",":
+                            imagens.add(R.drawable.decimal);
+                            break;
+                        case ".":
+                            imagens.add(R.drawable.milhar);
                             break;
                         case " " :
                             //imagens.clear();
