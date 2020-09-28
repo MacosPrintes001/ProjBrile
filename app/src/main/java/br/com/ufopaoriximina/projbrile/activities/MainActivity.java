@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Permissoes.validarPermissoes(permissoesNecessarias, this, 1);
@@ -183,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
             mImageView.setImageBitmap(imgBitMap);
         }
     }
+
 
     public void cornvertToGray() {
         try {
