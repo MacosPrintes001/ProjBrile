@@ -1,7 +1,6 @@
 package br.com.ufopaoriximina.projbrile.config;
 
 import java.util.Arrays;
-
 public class bdLetra {
     public static String[] letraBD(int[] snap, String flags) {
         int flag = Integer.parseInt(flags);

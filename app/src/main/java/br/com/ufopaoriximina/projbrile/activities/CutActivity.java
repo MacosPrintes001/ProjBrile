@@ -53,7 +53,7 @@ public class CutActivity extends AppCompatActivity {
     private ImageView concluir, cancelar;
     private boolean escolhido = false;
     private Bitmap grayBitMap, imgBitMap;
-    private ArrayList<String> texto = new ArrayList<>();
+    private String texto = " ";
     private TextView indicacao;
 
     @Override
@@ -212,10 +212,9 @@ public class CutActivity extends AppCompatActivity {
                 Imgproc.cvtColor(Rgba, grayMat, Imgproc.COLOR_RGB2GRAY);
 
                 //ThresHold(Limiarização)
-                Imgproc.threshold(grayMat, grayMat, 233, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C);
+                Imgproc.threshold(grayMat, grayMat, 234, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C);
 
                 //Median Filter(Filtro de Mediana/Morfologia)
-                //Imgproc.medianBlur(grayMat, grayMat, 3);
                 Imgproc.GaussianBlur(grayMat, grayMat, new Size(9, 9), 0.2);
 
                 //Erode
@@ -255,28 +254,29 @@ public class CutActivity extends AppCompatActivity {
                     centroids.get(1).add(x);//coluna
                 }
 
-//                System.out.println("arrayX: " + arrayX);
-//                System.out.println("ArrayY: " + arrayY);
 
                 // Odena os arrays X e Y
                 Collections.sort(arrayX);
                 Collections.sort(arrayY);
 
-//                System.out.println("arrayX: " + arrayX);
-//                System.out.println("ArrayY: " + arrayY);
+                System.out.println("Cex: " + centroids.get(0).size());
+                System.out.println("Cex: " + centroids.get(1).size());
 
                 //removendo 0 do centroids
                 for (int i = 0; i < centroids.get(0).size(); i++) {
                     if (centroids.get(0).get(i) == 0 && centroids.get(1).get(i) == 0) {
+                        System.out.println("X: " + centroids.get(0).get(i));
+                        System.out.println("Y: " + centroids.get(1).get(i));
                         centroids.get(0).remove(i);
                         centroids.get(1).remove(i);
                     }
                 }
 
                 //Remove os primeiros valores caso eles serem  0
-                if (arrayX.get(0) == 0){
+                if (arrayX.get(0) == 0) {
                     arrayX.remove(arrayX.get(0));
-                }if (arrayY.get(0) == 0) {
+                }
+                if (arrayY.get(0) == 0) {
                     arrayY.remove(arrayY.get(0));
                 }
 
@@ -311,9 +311,7 @@ public class CutActivity extends AppCompatActivity {
 
                 //Insere as demais Linhas na imagem
                 ArrayList<Integer> index_lin = new ArrayList<>();
-
                 index_lin.add(arrayY.get(0) - incremento); //adicionando a posicao da linha que foi adicionada manualmente
-
                 int contadorAntesY = 0;
 
                 for (Integer integer : arrayY) {
@@ -329,23 +327,9 @@ public class CutActivity extends AppCompatActivity {
                     }
                 }
 
-//              System.out.println("Centros 1: "+ centroids.get(0).size());
-//              System.out.println("Centros2: "+centroids.get(1).size());
-//              System.out.println("ArrayX: " + arrayX);
-//              System.out.println("ArrayY: " + arrayY);
-//              System.out.println(imgBitMap.getWidth());
-//              System.out.println(imgBitMap.getHeight());
-//              Utils.matToBitmap(grayMat, imgBitMap);
-//              view.setImageBitmap(imgBitMap);
 
-                System.out.println("Centroids: "+centroids);
-                System.out.println("IndexLin: " + index_lin);
-                System.out.println("IndexCol: " + index_col);
+                index_col = verificao(index_lin, index_col, centroids); // função para verificar se os primeiros pontos são maiusculas
 
-
-
-
-                verificao(index_lin, index_col, centroids); // função para verificar se os primeiros pontos são maiusculas
 
                 //Reconhecimento das letras
                 String flag = "0";
@@ -362,29 +346,24 @@ public class CutActivity extends AppCompatActivity {
                                 for (int k = 0; k < centroids.get(0).size(); k++) {
 
                                     if (centroids.get(0).get(k) >= index_lin.get(i + m) && centroids.get(0).get(k) <= index_lin.get((i + m) + 1) && centroids.get(1).get(k) >= index_col.get(j + n) && centroids.get(1).get(k) <= index_col.get((j + n) + 1)) {
-
                                         vLetras[cnt] = 1;
                                     }
-                                }
-                                cnt = cnt + 1;
+                                }cnt = cnt + 1;
                             }
                         }
 
 
                         String[] letra = bdLetra.letraBD(vLetras, flag);
-                        //System.out.println(letra[0]);
-                        texto.add(letra[0]);
-
-                        //System.out.println(letra[0]);
+                        //System.out.println(letra[0]+" ");
+                        texto = texto + letra[0];
                         flag = letra[1];
                     }
                 }
+                System.out.println(texto);
 
                 Utils.matToBitmap(grayMat, grayBitMap);
                 //set to the Imageview
                 view.setImageBitmap(grayBitMap);
-
-
 //
 //                Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
 //                Bundle enviaTraducao = new Bundle();
@@ -393,17 +372,12 @@ public class CutActivity extends AppCompatActivity {
 //                startActivity(intentEnviadora);
 //                finish();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.d("Erro", Objects.requireNonNull(e.getMessage()));
         }
     }
 
-
-
-
-
-
-    private ArrayList<Integer> verificao(ArrayList<Integer> Linha, ArrayList<Integer> Coluna, ArrayList<ArrayList<Integer>> Centroids) {
+ private ArrayList<Integer> verificao(ArrayList<Integer> Linha, ArrayList<Integer> Coluna, ArrayList<ArrayList<Integer>> Centroids) {
 
         ArrayList<Integer> remCol = new ArrayList<>();
         remCol.add(0);
@@ -416,35 +390,18 @@ public class CutActivity extends AppCompatActivity {
                 int[] vCent =   {0, 0, 0, 0, 0, 0};
                 int cnt = 0;
 
-
-
                 //Preenche vLetras para dps fazer a comparação da proximidade dos pontos
-                for (int m = 0; m < 3; m++) {  //Linha
-                    for (int n = 0; n < 2; n++) {  //Coluna
+                for (int n = 0; n < 3; n++) {  //Linha
+                    for (int m = 0; m < 2; m++) {  //Coluna
                         for (int k = 0; k < Centroids.get(0).size(); k++) {
 
-//                            System.out.println("Começou");
-//                            System.out.println("n: "+n);
-//                            System.out.println("m: "+m);
-//                            System.out.println("k: "+k);
-//                            System.out.println("i: "+i);
-//                            System.out.println("Centroids.get(0).get(k): "+Centroids.get(0).get(k));
-//                            System.out.println("Linha.get(i + m): "+Linha.get(i + m));
-//                            System.out.println("Linha.get(((i + m) + 1))"+Linha.get(((i + m) + 1)));
-//                            System.out.println("Centroids.get(1).get(k): "+Centroids.get(1).get(k));
-//                            System.out.println("Coluna.get(n): "+Coluna.get(n));
-//                            System.out.println("Coluna.get(n + 1)): "+Coluna.get(n + 1));
-//                            System.out.println("Terminou");
-
-                            if (Centroids.get(0).get(k) >= Linha.get(i + m) && Centroids.get(0).get(k) <= Linha.get(((i + m) + 1)) && Centroids.get(1).get(k) >= Coluna.get(n) && Centroids.get(1).get(k) <= Coluna.get(n + 1)) {
+                            if (Centroids.get(0).get(k) >= Linha.get(i + m) && Centroids.get(0).get(k) <= Linha.get((i + m) + 1) && Centroids.get(1).get(k) >= Coluna.get(n) && Centroids.get(1).get(k) <= Coluna.get(n + 1)) {
                                 vLetras[cnt] = 1;
                                 vCent[cnt] = k;
                             }
-
                         }cnt = cnt+1;
                     }
                 }
-
 
                 System.out.println(Arrays.toString(vLetras));
 
@@ -491,13 +448,13 @@ public class CutActivity extends AppCompatActivity {
                 }
 
             }
-            //System.out.println(Collections.max(remCol));
         }
-
         //se remCol tiver um valor 1 significa que os primeiros pontos são apenas maiusculos e o descarta
         if (Collections.max(remCol) == 1){
             Coluna.remove(Coluna.get(0));
         }
+
+     System.out.println("Tudo feito");
         return Coluna;
     }
 
