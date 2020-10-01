@@ -212,16 +212,16 @@ public class CutActivity extends AppCompatActivity {
                 Imgproc.cvtColor(Rgba, grayMat, Imgproc.COLOR_RGB2GRAY);
 
                 //ThresHold(Limiarização)
-                Imgproc.threshold(grayMat, grayMat, 234, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C);
+                Imgproc.threshold(grayMat, grayMat, 233, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C);
 
                 //Median Filter(Filtro de Mediana/Morfologia)
                 Imgproc.GaussianBlur(grayMat, grayMat, new Size(9, 9), 0.2);
 
-                //Erode
-                Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
-
                 //Dilate
                 Imgproc.dilate(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
+
+                //Erode
+                Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
 
 
                 // find contours (Acha o contorno dos circulos)
@@ -281,7 +281,7 @@ public class CutActivity extends AppCompatActivity {
                 }
 
 
-                int incremento = 5;
+                int incremento = 4;
 
                 //Insere UMA coluna antes do primeiro centroid
                 Imgproc.line(grayMat, new Point(arrayX.get(0) - incremento, 0), new Point(arrayX.get(0) - incremento, imgBitMap.getHeight()), new Scalar(130, 0, 0));
@@ -330,6 +330,7 @@ public class CutActivity extends AppCompatActivity {
 
                 index_col = verificao(index_lin, index_col, centroids); // função para verificar se os primeiros pontos são maiusculas
 
+                String espace = " \n ";
 
                 //Reconhecimento das letras
                 String flag = "0";
@@ -354,12 +355,13 @@ public class CutActivity extends AppCompatActivity {
 
 
                         String[] letra = bdLetra.letraBD(vLetras, flag);
-                        //System.out.println(letra[0]+" ");
+                        System.out.println(letra[0]);
                         texto = texto + letra[0];
                         flag = letra[1];
                     }
+                    texto = texto + espace;
+                    System.out.println(" \n ");
                 }
-                System.out.println(texto);
 
                 Utils.matToBitmap(grayMat, grayBitMap);
                 //set to the Imageview
