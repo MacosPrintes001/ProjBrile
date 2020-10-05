@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="br.com.ufopaoriximina.projbrile">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:ignore="ManifestOrder" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,19 +16,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activities.CutActivity" />
-
-        <activity android:name=".activities.aprendizagem.ActivityAprendizagem" />
-        <activity
-            android:name=".activities.ActivityEdicaoImagem"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activities.ActivityInicial">
+        <activity android:name=".activities.TelaCarregamento">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.CutActivity" />
+        <activity android:name=".activities.aprendizagem.ActivityAprendizagem" />
+        <activity
+            android:name=".activities.ActivityEdicaoImagem"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.ActivityInicial">
+
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity
@@ -36,11 +43,5 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        tools:ignore="ManifestOrder" />
 
 </manifest>
