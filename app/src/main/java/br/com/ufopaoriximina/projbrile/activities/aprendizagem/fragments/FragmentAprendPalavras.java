@@ -265,8 +265,7 @@ public class FragmentAprendPalavras extends Fragment {
                             imagens.add(R.drawable.letra_z);
                             break;
                         case " " :
-                            //imagens.clear();
-                            //Toast.makeText(getContext(), "Espaço", Toast.LENGTH_SHORT).show();
+                            imagens.add(R.drawable.espaco);
                             break;
                         default:
                             break;
