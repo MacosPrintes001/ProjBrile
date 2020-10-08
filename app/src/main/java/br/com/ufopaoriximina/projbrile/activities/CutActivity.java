@@ -355,24 +355,24 @@ public class CutActivity extends AppCompatActivity {
 
 
                         String[] letra = bdLetra.letraBD(vLetras, flag);
-                        System.out.println(letra[0]);
+                        //System.out.println(letra[0]);
                         texto = texto + letra[0];
                         flag = letra[1];
                     }
                     texto = texto + espace;
-                    System.out.println(" \n ");
+                    //System.out.println(" \n ");
                 }
 
-                Utils.matToBitmap(grayMat, grayBitMap);
-                //set to the Imageview
-                view.setImageBitmap(grayBitMap);
-//
-//                Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
-//                Bundle enviaTraducao = new Bundle();
-//                enviaTraducao.putString("string_texto", String.valueOf(texto));
-//                intentEnviadora.putExtras(enviaTraducao);
-//                startActivity(intentEnviadora);
-//                finish();
+//                Utils.matToBitmap(grayMat, grayBitMap);
+//                //set to the Imageview
+//                view.setImageBitmap(grayBitMap);
+
+                Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
+                Bundle enviaTraducao = new Bundle();
+                enviaTraducao.putString("string_texto", String.valueOf(texto));
+                intentEnviadora.putExtras(enviaTraducao);
+                startActivity(intentEnviadora);
+                finish();
             }
         } catch (Exception e) {
             Log.d("Erro", Objects.requireNonNull(e.getMessage()));
