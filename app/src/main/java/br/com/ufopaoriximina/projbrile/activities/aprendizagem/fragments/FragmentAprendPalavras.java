@@ -267,6 +267,24 @@ public class FragmentAprendPalavras extends Fragment {
                         case " " :
                             imagens.add(R.drawable.espaco);
                             break;
+                        case ",":
+                            imagens.add(R.drawable.virgula);
+                            break;
+                        case ":":
+                            imagens.add(R.drawable.dois_pontos);
+                            break;
+                        case ";":
+                            imagens.add(R.drawable.ponto_e_virgula);
+                            break;
+                        case "'":
+                            imagens.add(R.drawable.aspas_simples);
+                            break;
+                        case "?":
+                            imagens.add(R.drawable.interrogacao);
+                            break;
+                        case "!":
+                            imagens.add(R.drawable.exclamacao);
+                            break;
                         default:
                             break;
                     }

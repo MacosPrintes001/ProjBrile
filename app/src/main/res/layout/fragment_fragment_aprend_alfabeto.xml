@@ -25,13 +25,13 @@
 
     <GridView
         android:id="@+id/gridViewPalavra"
-        android:layout_width="411dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="204dp"
-        android:gravity="center|center_vertical|center_horizontal"
-        android:numColumns="auto_fit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:numColumns="2"
+        android:columnWidth="30dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
