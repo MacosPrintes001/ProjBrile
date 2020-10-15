@@ -51,7 +51,7 @@ public class FragmentAprendAlfabeto extends Fragment {
         letraInfor = view.findViewById(R.id.textoInformacao);
         //Grid View
         gridView = view.findViewById(R.id.gridViewPalavra);
-        imagens.add(R.drawable.test);
+        imagens.add(R.drawable.limpa);
         GridAdapter2 gridAdapter = new GridAdapter2(view.getContext(), imagens);
         gridView.setAdapter(gridAdapter);
         //Verifica a mudança dinamica dos dados
@@ -301,7 +301,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                         break;
                     default:
                         imagens.clear();
-                        imagens.add(R.drawable.test);
+                        imagens.add(R.drawable.limpa);
                         break;
                 }
                 GridAdapter2 gridAdapter = new GridAdapter2(view.getContext(), imagens);

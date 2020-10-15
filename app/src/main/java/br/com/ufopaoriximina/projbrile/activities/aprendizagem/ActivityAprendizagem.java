@@ -68,7 +68,6 @@ public class ActivityAprendizagem extends AppCompatActivity implements
             return super.onKeyDown(keyCode, event);
         }
     }
-
     //Implementação da Interface dos Fragments
     @Override
     public void onFragmentInteraction(Uri uri) {

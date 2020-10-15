@@ -77,7 +77,7 @@ public class FragmentAprendNumero extends Fragment {
                         letra.setImageResource(R.drawable.n9);
                         break;
                     default:
-                        letra.setImageResource(R.drawable.test);
+                        letra.setImageResource(R.drawable.limpa);
                         break;
                 }
             }

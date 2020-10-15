@@ -21,7 +21,7 @@
         app:stl_defaultTabTextColor="#fff"
         app:stl_defaultTabTextHorizontalPadding="19dp"
         app:stl_defaultTabTextMinWidth="1dp"
-        app:stl_defaultTabTextSize="14sp"
+        app:stl_defaultTabTextSize="16sp"
         app:stl_distributeEvenly="false"
         app:stl_dividerColor="@android:color/transparent"
         app:stl_dividerThickness="2dp"
