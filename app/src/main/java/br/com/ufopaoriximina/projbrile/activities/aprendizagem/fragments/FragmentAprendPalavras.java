@@ -1,8 +1,10 @@
 package br.com.ufopaoriximina.projbrile.activities.aprendizagem.fragments;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -10,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -71,7 +74,7 @@ public class FragmentAprendPalavras extends Fragment {
             public void onClick(View view) {
                 imagens.clear();
                 //Tentativa de organizar um array de letras
-                String[] a =  editPalavra.getText().toString().split("");
+                final String[] a =  editPalavra.getText().toString().split("");
                 //Verifica se o EditText está vazio
                 if(editPalavra.getText().toString().isEmpty()){
                     imagens.clear();
@@ -292,6 +295,26 @@ public class FragmentAprendPalavras extends Fragment {
                 }
                 GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
                 gridView.setAdapter(gridAdapter);
+                /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        switch (i){
+                            default:
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setMessage("A célula clicada representa: " + a[i] + ".")
+                                        .setCancelable(true)
+                                        .setPositiveButton("Entendi", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                                break;
+                        }
+                    }
+                });*/
             }
         });
 

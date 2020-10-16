@@ -39,7 +39,10 @@ public class FragmentAprendNumero extends Fragment {
         //EditText do texto digitado
         letraInfor = view.findViewById(R.id.textoInformacao);
         gridView = view.findViewById(R.id.gridViewPalavra);
+        imagens.add(R.drawable.inicial_numerico);
         imagens.add(R.drawable.limpa);
+        GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
+        gridView.setAdapter(gridAdapter);
         //ImageView para a número (Falta fazer)
         //Verifica a mudança dinamica dos dados
         letraInfor.addTextChangedListener(new TextWatcher() {

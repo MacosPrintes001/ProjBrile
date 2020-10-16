@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,7 @@ public class FragmentAprendAlfabeto extends Fragment {
         //Grid View
         gridView = view.findViewById(R.id.gridViewPalavra);
         imagens.add(R.drawable.limpa);
+        imagens.add(R.drawable.limpa);
         GridAdapter2 gridAdapter = new GridAdapter2(view.getContext(), imagens);
         gridView.setAdapter(gridAdapter);
         //Verifica a mudança dinamica dos dados
@@ -68,6 +70,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "a":
                         imagens.clear();
                         imagens.add(R.drawable.letra_a);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "A":
                         imagens.clear();
@@ -77,6 +80,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "b":
                         imagens.clear();
                         imagens.add(R.drawable.letra_b);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "B":
                         imagens.clear();
@@ -86,6 +90,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "c":
                         imagens.clear();
                         imagens.add(R.drawable.letra_c);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "C":
                         imagens.clear();
@@ -95,6 +100,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "d":
                         imagens.clear();
                         imagens.add(R.drawable.letra_d);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "D":
                         imagens.clear();
@@ -104,6 +110,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "e":
                         imagens.clear();
                         imagens.add(R.drawable.letra_e);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "E":
                         imagens.clear();
@@ -113,6 +120,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "f":
                         imagens.clear();
                         imagens.add(R.drawable.letra_f);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "F":
                         imagens.clear();
@@ -122,6 +130,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "g":
                         imagens.clear();
                         imagens.add(R.drawable.letra_g);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "G":
                         imagens.clear();
@@ -131,6 +140,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "h":
                         imagens.clear();
                         imagens.add(R.drawable.letra_h);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "H":
                         imagens.clear();
@@ -140,6 +150,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "i":
                         imagens.clear();
                         imagens.add(R.drawable.letra_i);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "I":
                         imagens.clear();
@@ -149,6 +160,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "j":
                         imagens.clear();
                         imagens.add(R.drawable.letra_j);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "J":
                         imagens.clear();
@@ -158,6 +170,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "k":
                         imagens.clear();
                         imagens.add(R.drawable.letra_k);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "K":
                         imagens.clear();
@@ -167,6 +180,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "l":
                         imagens.clear();
                         imagens.add(R.drawable.letra_l);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "L":
                         imagens.clear();
@@ -176,6 +190,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "m":
                         imagens.clear();
                         imagens.add(R.drawable.letra_m);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "M":
                         imagens.clear();
@@ -185,6 +200,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "n":
                         imagens.clear();
                         imagens.add(R.drawable.letra_n);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "N":
                         imagens.clear();
@@ -194,6 +210,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "o":
                         imagens.clear();
                         imagens.add(R.drawable.letra_m);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "O":
                         imagens.clear();
@@ -203,6 +220,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "p":
                         imagens.clear();
                         imagens.add(R.drawable.letra_p);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "P":
                         imagens.clear();
@@ -212,6 +230,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "q":
                         imagens.clear();
                         imagens.add(R.drawable.letra_q);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "Q":
                         imagens.clear();
@@ -221,6 +240,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "r":
                         imagens.clear();
                         imagens.add(R.drawable.letra_r);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "R":
                         imagens.clear();
@@ -230,6 +250,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "s":
                         imagens.clear();
                         imagens.add(R.drawable.letra_s);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "S":
                         imagens.clear();
@@ -239,6 +260,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "t":
                         imagens.clear();
                         imagens.add(R.drawable.letra_t);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "T":
                         imagens.clear();
@@ -248,6 +270,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "u":
                         imagens.clear();
                         imagens.add(R.drawable.letra_u);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "U":
                         imagens.clear();
@@ -257,6 +280,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "v":
                         imagens.clear();
                         imagens.add(R.drawable.letra_v);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "V":
                         imagens.clear();
@@ -266,6 +290,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "w":
                         imagens.clear();
                         imagens.add(R.drawable.letra_w);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "W":
                         imagens.clear();
@@ -275,6 +300,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "x":
                         imagens.clear();
                         imagens.add(R.drawable.letra_x);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "X":
                         imagens.clear();
@@ -284,6 +310,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "y":
                         imagens.clear();
                         imagens.add(R.drawable.letra_y);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "Y":
                         imagens.clear();
@@ -293,6 +320,7 @@ public class FragmentAprendAlfabeto extends Fragment {
                     case "z":
                         imagens.clear();
                         imagens.add(R.drawable.letra_z);
+                        imagens.add(R.drawable.limpa);
                         break;
                     case "Z":
                         imagens.clear();
@@ -302,6 +330,8 @@ public class FragmentAprendAlfabeto extends Fragment {
                     default:
                         imagens.clear();
                         imagens.add(R.drawable.limpa);
+                        imagens.add(R.drawable.limpa);
+                        //Toast.makeText(getContext(), "Não foi encontrado uma célula braile correspondente.", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 GridAdapter2 gridAdapter = new GridAdapter2(view.getContext(), imagens);
