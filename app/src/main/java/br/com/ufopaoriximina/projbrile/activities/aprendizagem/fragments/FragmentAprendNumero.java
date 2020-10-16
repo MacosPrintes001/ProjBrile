@@ -11,15 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 import br.com.ufopaoriximina.projbrile.R;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
 
 
 public class FragmentAprendNumero extends Fragment {
 
     private EditText letraInfor;
-    private ImageView letra;
+    private ArrayList<Integer> imagens = new ArrayList<>();
+    private GridView gridView;
     public FragmentAprendNumero() {
         // Required empty public constructor
     }
@@ -30,11 +35,12 @@ public class FragmentAprendNumero extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //Recupera o view da pagina
-        View view = inflater.inflate(R.layout.fragment_fragment_aprend_numero, container, false);
+        final View view = inflater.inflate(R.layout.fragment_fragment_aprend_numero, container, false);
         //EditText do texto digitado
         letraInfor = view.findViewById(R.id.textoInformacao);
+        gridView = view.findViewById(R.id.gridViewPalavra);
+        imagens.add(R.drawable.limpa);
         //ImageView para a número (Falta fazer)
-        letra = view.findViewById(R.id.imageViewLetra);
         //Verifica a mudança dinamica dos dados
         letraInfor.addTextChangedListener(new TextWatcher() {
             @Override
@@ -45,41 +51,57 @@ public class FragmentAprendNumero extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //Switch para verificar o número digitado (Falta terminar)
-                switch (letraInfor.getText().toString()){
-                    case "0":
-                        letra.setImageResource(R.drawable.n0);
-                        break;
-                    case "1":
-                        letra.setImageResource(R.drawable.n1);
-                        break;
-                    case "2":
-                        letra.setImageResource(R.drawable.n2);
-                        break;
-                    case "3":
-                        letra.setImageResource(R.drawable.n3);
-                        break;
-                    case "4":
-                        letra.setImageResource(R.drawable.n4);
-                        break;
-                    case "5":
-                        letra.setImageResource(R.drawable.n5);
-                        break;
-                    case "6":
-                        letra.setImageResource(R.drawable.n6);
-                        break;
-                    case "7":
-                        letra.setImageResource(R.drawable.n7);
-                        break;
-                    case "8":
-                        letra.setImageResource(R.drawable.n8);
-                        break;
-                    case "9":
-                        letra.setImageResource(R.drawable.n9);
-                        break;
-                    default:
-                        letra.setImageResource(R.drawable.limpa);
-                        break;
+                imagens.clear();
+                //Tentativa de organizar um array de letras
+                String[] a =  letraInfor.getText().toString().split("");
+                //Verifica se o EditText está vazio
+                if(letraInfor.getText().toString().isEmpty()){
+                    imagens.clear();
+                    GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
+                    gridView.setAdapter(gridAdapter);
                 }
+                imagens.add(R.drawable.inicial_numerico);
+                int cont = 0;
+                while (cont < a.length){
+                    switch (a[cont]){
+                        case "0":
+                            imagens.add(R.drawable.letra_j);
+                            break;
+                        case "1":
+                            imagens.add(R.drawable.letra_a);
+                            break;
+                        case "2":
+                            imagens.add(R.drawable.letra_b);
+                            break;
+                        case "3":
+                            imagens.add(R.drawable.letra_c);
+                            break;
+                        case "4":
+                            imagens.add(R.drawable.letra_d);
+                            break;
+                        case "5":
+                            imagens.add(R.drawable.letra_e);
+                            break;
+                        case "6":
+                            imagens.add(R.drawable.letra_f);
+                            break;
+                        case "7":
+                            imagens.add(R.drawable.letra_g);
+                            break;
+                        case "8":
+                            imagens.add(R.drawable.letra_h);
+                            break;
+                        case "9":
+                            imagens.add(R.drawable.letra_i);
+                            break;
+                        default:
+                            imagens.add(R.drawable.limpa);
+                            break;
+                    }
+                    cont += 1;
+                }
+                GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
+                gridView.setAdapter(gridAdapter);
             }
 
             @Override
