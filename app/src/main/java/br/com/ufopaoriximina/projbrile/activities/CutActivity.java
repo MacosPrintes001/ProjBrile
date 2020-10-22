@@ -1,17 +1,11 @@
 package br.com.ufopaoriximina.projbrile.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,6 +15,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import com.yalantis.ucrop.UCrop;
 
@@ -34,23 +35,22 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
 
-import java.io.DataOutput;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.config.bdLetra;
-import okhttp3.internal.Util;
 
 public class CutActivity extends AppCompatActivity {
     private ImageView view;
-    private final int CODE_IMAGE_GALERY = 1;
-    private ImageView concluir, cancelar;
+    Uri image_uri;
+    private final int CODE_IMAGE_GALERY = 1, IMAGE_CAPTURE_CODE = 2;
+    private ImageView concluir, cancelar, camera;
     private boolean escolhido = false;
     private Bitmap grayBitMap, imgBitMap;
     private String texto = " ";
@@ -63,14 +63,22 @@ public class CutActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         OpenCVLoader.initDebug();
         init();
-        view.setOnClickListener(new View.OnClickListener() {
+
+
+        view.setOnClickListener(new View.OnClickListener() { //perguntar para o usuario se a imagem vai ser da galeria ou da camera
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent().
-                        setAction(Intent.ACTION_GET_CONTENT).
-                        setType("image/*"), CODE_IMAGE_GALERY);
+                startActivityForResult(new Intent().setAction(Intent.ACTION_GET_CONTENT).setType("image/*"), CODE_IMAGE_GALERY);
             }
         });
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takePicture();
+            }
+        });
+
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,10 +93,22 @@ public class CutActivity extends AppCompatActivity {
         });
     }
 
+    private void takePicture() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent cameraIntet = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntet.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(cameraIntet, IMAGE_CAPTURE_CODE);
+    }
+
     private void init() {
         this.view = findViewById(R.id.imageView);
         concluir = findViewById(R.id.imagemConcluirEdition);
         cancelar = findViewById(R.id.imagemCancelEdition);
+        camera = findViewById(R.id.btnCamera);
         indicacao = findViewById(R.id.observacaoText);
     }
 
@@ -110,8 +130,7 @@ public class CutActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), ActivityInicial.class);
-                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
-                                , R.transition.fade_in, R.transition.fade_out);
+                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.transition.fade_in, R.transition.fade_out);
                         ActivityCompat.startActivity(CutActivity.this, i, activityOptionsCompat.toBundle());
                         finish();
                     }
@@ -146,7 +165,25 @@ public class CutActivity extends AppCompatActivity {
                 }
             }
         }
+
+        else if (requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK){
+            if (image_uri != null){
+               startCrop(image_uri);
+            }
+        }
     }
+
+    private Uri getImageUri(Context context, Bitmap inImage) {
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "imagemUri", null);
+        }catch (Exception o){
+            Toast.makeText(this, "" + o, Toast.LENGTH_SHORT).show();
+        }
+        return null;
+    }
+
 
     private void startCrop(@NonNull Uri uri) {
         String destinationFileName = "SampleCropImg";
@@ -154,9 +191,9 @@ public class CutActivity extends AppCompatActivity {
 
         UCrop uCrop = UCrop.of(uri, Uri.fromFile(new File(getCacheDir(), destinationFileName)));
 
-        uCrop.withAspectRatio(1, 1);
+//        uCrop.withAspectRatio(1, 1);
 //        uCrop.withAspectRatio(3,4);
-//        uCrop.useSourceImageAspectRatio();
+        uCrop.useSourceImageAspectRatio();
 //        uCrop.withAspectRatio(2,3);
 //        uCrop.withAspectRatio(16,9);
 
@@ -172,9 +209,8 @@ public class CutActivity extends AppCompatActivity {
         options.setCompressionQuality(70);
 
         //Compresstype
-        //options.setCompressionFormat(Bitmap.CompressFormat.PNG);
-        //options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
-
+//        options.setCompressionFormat(Bitmap.CompressFormat.PNG);
+//        options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
 
         //UI
         options.setHideBottomControls(false);
@@ -191,7 +227,7 @@ public class CutActivity extends AppCompatActivity {
     public void traduzir() {
         try {
             if (imgBitMap == null) {
-                Toast.makeText(getApplicationContext(), "ImageView não selecionada, por favor selecione uma imagem", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Nenhuma imagem detectada, por favor selecione uma imagem", Toast.LENGTH_SHORT).show();
             } else {
                 Mat Rgba = new Mat();
                 Mat grayMat = new Mat();
@@ -203,47 +239,50 @@ public class CutActivity extends AppCompatActivity {
                 int width = imgBitMap.getWidth();
                 int height = imgBitMap.getHeight();
 
+                //transforma o padrão de cores da imagem para RGB
                 grayBitMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
 
-                //BitMap to mat
+                //BitMap to Mat
                 Utils.bitmapToMat(imgBitMap, Rgba);
+
+                /**exemplo d eque naõ pode usar um BitMap*/
+                //Imgproc.cvtColor(imgBitMap, imgBitMap, Imgproc.COLOR_RGB2GRAY);
+                //Imgproc.cvtColor
+                ;
 
                 //Gray Scale
                 Imgproc.cvtColor(Rgba, grayMat, Imgproc.COLOR_RGB2GRAY);
-
                 //ThresHold(Limiarização)
                 Imgproc.threshold(grayMat, grayMat, 233, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C);
-
                 //Median Filter(Filtro de Mediana/Morfologia)
                 Imgproc.GaussianBlur(grayMat, grayMat, new Size(9, 9), 0.2);
-
                 //Dilate
                 Imgproc.dilate(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
-
                 //Erode
                 Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
+
 
 
                 // find contours (Acha o contorno dos circulos)
                 List<MatOfPoint> countours = new ArrayList<>();
                 Mat hierarchy = new Mat();
-
                 Imgproc.findContours(grayMat, countours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
                 //Find centroids (acha p centro de cada circulo e coloca em X(coluna) Y(Linha))
                 ArrayList<Integer> arrayX = new ArrayList<>();
                 ArrayList<Integer> arrayY = new ArrayList<>();
-
-                ArrayList<ArrayList<Integer>> centroids = new ArrayList<>();
-
-                centroids.add(new ArrayList<Integer>());
-                centroids.add(new ArrayList<Integer>());
-
                 List<Moments> mu = new ArrayList<>();
 
+
+                ArrayList<ArrayList<Integer>> centroids = new ArrayList<>();
+                centroids.add(new ArrayList<Integer>());
+                centroids.add(new ArrayList<Integer>());
+
+
                 for (int i = 0; i < countours.size(); i++) {
-                    mu.add(i, Imgproc.moments(countours.get(i), false));
+                    mu.add(i, Imgproc.moments(countours.get(i), true));
                     Moments p = mu.get(i);
+
                     int x = (int) (p.get_m10() / p.get_m00());
                     int y = (int) (p.get_m01() / p.get_m00());
 
@@ -254,19 +293,13 @@ public class CutActivity extends AppCompatActivity {
                     centroids.get(1).add(x);//coluna
                 }
 
-
                 // Odena os arrays X e Y
                 Collections.sort(arrayX);
                 Collections.sort(arrayY);
 
-                System.out.println("Cex: " + centroids.get(0).size());
-                System.out.println("Cex: " + centroids.get(1).size());
-
                 //removendo 0 do centroids
                 for (int i = 0; i < centroids.get(0).size(); i++) {
                     if (centroids.get(0).get(i) == 0 && centroids.get(1).get(i) == 0) {
-                        System.out.println("X: " + centroids.get(0).get(i));
-                        System.out.println("Y: " + centroids.get(1).get(i));
                         centroids.get(0).remove(i);
                         centroids.get(1).remove(i);
                     }
@@ -292,18 +325,12 @@ public class CutActivity extends AppCompatActivity {
                 index_col.add(arrayX.get(0) - incremento); //adicionando a posicao da coluna que foi adicionada manualmente
 
                 int contadorAntesX = 0;
-
                 for (Integer integer : arrayX) {
-
                     if (integer >= (contadorAntesX + incremento)) {
-
                         Imgproc.line(grayMat, new Point(integer + incremento, 0), new Point(integer + incremento, imgBitMap.getHeight()), new Scalar(130, 0, 0)); //fazer colunas
-
                         contadorAntesX = integer;
-
                         index_col.add(contadorAntesX + incremento);
                     }
-
                 }
 
                 //Insere UMA linha antes do primeiro centroid
@@ -311,25 +338,19 @@ public class CutActivity extends AppCompatActivity {
 
                 //Insere as demais Linhas na imagem
                 ArrayList<Integer> index_lin = new ArrayList<>();
+
                 index_lin.add(arrayY.get(0) - incremento); //adicionando a posicao da linha que foi adicionada manualmente
+
                 int contadorAntesY = 0;
-
                 for (Integer integer : arrayY) {
-
                     if (integer >= (contadorAntesY + incremento)) {
-
                         Imgproc.line(grayMat, new Point(0, integer + incremento), new Point(imgBitMap.getWidth(), integer + incremento), new Scalar(130, 0, 0)); //fazer linhas
-
                         contadorAntesY = integer;
-
                         index_lin.add(contadorAntesY + incremento);
-
                     }
                 }
 
-
                 index_col = verificao(index_lin, index_col, centroids); // função para verificar se os primeiros pontos são maiusculas
-
                 String espace = " \n ";
 
                 //Reconhecimento das letras
@@ -341,11 +362,8 @@ public class CutActivity extends AppCompatActivity {
                         int cnt = 0;
 
                         for (int n = 0; n < 2; n++) {
-
                             for (int m = 0; m < 3; m++) {
-
                                 for (int k = 0; k < centroids.get(0).size(); k++) {
-
                                     if (centroids.get(0).get(k) >= index_lin.get(i + m) && centroids.get(0).get(k) <= index_lin.get((i + m) + 1) && centroids.get(1).get(k) >= index_col.get(j + n) && centroids.get(1).get(k) <= index_col.get((j + n) + 1)) {
                                         vLetras[cnt] = 1;
                                     }
@@ -353,20 +371,22 @@ public class CutActivity extends AppCompatActivity {
                             }
                         }
 
-
                         String[] letra = bdLetra.letraBD(vLetras, flag);
                         //System.out.println(letra[0]);
                         texto = texto + letra[0];
                         flag = letra[1];
                     }
                     texto = texto + espace;
-                    //System.out.println(" \n ");
                 }
 
-//                Utils.matToBitmap(grayMat, grayBitMap);
-//                //set to the Imageview
-//                view.setImageBitmap(grayBitMap);
-
+//                Utils.matToBitmap(grayMat, imgBitMap);
+//                view.setImageBitmap(imgBitMap);
+//            }
+//        } catch (Exception e) {
+//            Log.d("Erro", Objects.requireNonNull(e.getMessage()));
+//        }
+//    }
+//}
                 Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
                 Bundle enviaTraducao = new Bundle();
                 enviaTraducao.putString("string_texto", String.valueOf(texto));
@@ -380,14 +400,11 @@ public class CutActivity extends AppCompatActivity {
     }
 
  private ArrayList<Integer> verificao(ArrayList<Integer> Linha, ArrayList<Integer> Coluna, ArrayList<ArrayList<Integer>> Centroids) {
-
         ArrayList<Integer> remCol = new ArrayList<>();
         remCol.add(0);
 
         for (int j = 0; j < 1; j++) {  //Coluna
-
             for (int i = 0; i <(Linha.size()-3); i=i+3) { //Linha
-
                 int[] vLetras = {0, 0, 0, 0, 0, 0};
                 int[] vCent =   {0, 0, 0, 0, 0, 0};
                 int cnt = 0;
@@ -396,7 +413,6 @@ public class CutActivity extends AppCompatActivity {
                 for (int n = 0; n < 3; n++) {  //Linha
                     for (int m = 0; m < 2; m++) {  //Coluna
                         for (int k = 0; k < Centroids.get(0).size(); k++) {
-
                             if (Centroids.get(0).get(k) >= Linha.get(i + m) && Centroids.get(0).get(k) <= Linha.get((i + m) + 1) && Centroids.get(1).get(k) >= Coluna.get(n) && Centroids.get(1).get(k) <= Coluna.get(n + 1)) {
                                 vLetras[cnt] = 1;
                                 vCent[cnt] = k;
@@ -405,11 +421,7 @@ public class CutActivity extends AppCompatActivity {
                     }
                 }
 
-                System.out.println(Arrays.toString(vLetras));
-
                 if (vLetras[0] == vLetras[2] && vLetras[0] != vLetras[1]) {
-
-                    System.out.println("entrou");
 
                     double r1 = 0;
                     double r2 = 0;
@@ -417,7 +429,6 @@ public class CutActivity extends AppCompatActivity {
                     double r4 = 0;
 
                     //nos if's a seguir esta sendo calculado a distancia dos pontos e guaradando em r1, r2, etc.
-
                     if (vLetras[0] == vLetras[3]) {
                         r1 = distancia(Centroids.get(1).get(vCent[0]), Centroids.get(1).get(vCent[3]),
                                 Centroids.get(0).get(vCent[0]), Centroids.get(0).get(vCent[3]));
@@ -440,7 +451,7 @@ public class CutActivity extends AppCompatActivity {
 
 
                     //se o if for verdadeiro remCol vai receber um valor 1
-                    if(r1 >= 12 || r2 >= 12 || r3 >= 14 || r4 >= 14 ){
+                    if(r1 >= 12 || r2 >= 12 || r3 >= 14 || r4 >= + 14){
                         remCol.add(1);
                     }
                     //caso contrario recebe 0
@@ -451,12 +462,12 @@ public class CutActivity extends AppCompatActivity {
 
             }
         }
+
         //se remCol tiver um valor 1 significa que os primeiros pontos são apenas maiusculos e o descarta
         if (Collections.max(remCol) == 1){
             Coluna.remove(Coluna.get(0));
         }
 
-     System.out.println("Tudo feito");
         return Coluna;
     }
 
