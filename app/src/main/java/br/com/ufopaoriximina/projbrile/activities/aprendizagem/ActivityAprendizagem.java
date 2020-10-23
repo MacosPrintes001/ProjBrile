@@ -1,14 +1,18 @@
 package br.com.ufopaoriximina.projbrile.activities.aprendizagem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -29,9 +33,12 @@ public class ActivityAprendizagem extends AppCompatActivity implements
 
 
     //Essa é a Activity da Tela de Aprendizagem
+    ViewPager viewPager;
+    SmartTabLayout viewPagerTab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_aprendizagem);
         //Ajeita o Elevation  e título da Toolbar (Só visual)
         getSupportActionBar().setElevation(0);
@@ -47,11 +54,24 @@ public class ActivityAprendizagem extends AppCompatActivity implements
                         .add("Expressões", FragmentAprendExpressoes.class)
                         .create()
         );
-        ViewPager viewPager = findViewById(R.id.viewpager2);
+        viewPager = findViewById(R.id.viewpager2);
         viewPager.setAdapter( adapter );
-        SmartTabLayout viewPagerTab = findViewById(R.id.smartTabLayout);
+        viewPagerTab = findViewById(R.id.smartTabLayout);
         viewPagerTab.setViewPager( viewPager );
 
+    }
+
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        Log.d("CONFIGCHANGED", "Entrou");
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            //Log.d("CONFIGCHANGED", "Entrou");
+        }else if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            //Log.d("CONFIGCHANGED", "Entrou");
+        }
     }
 
     //Verifica o clique no botão para voltar para o menu principal

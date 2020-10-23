@@ -1,13 +1,16 @@
 package br.com.ufopaoriximina.projbrile.activities.aprendizagem.fragments;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -350,5 +353,19 @@ public class FragmentAprendAlfabeto extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        Log.d("CONFIGCHANGED", "Entrou");
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+
+        }else if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            //Log.d("CONFIGCHANGED", "Entrou");
+
+
+        }
     }
 }
