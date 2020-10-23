@@ -35,23 +35,32 @@
                 android:id="@+id/imagemConcluirEdition"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="320dp"
+                android:layout_marginStart="300dp"
 
                 app:srcCompat="@drawable/ic_check_black_24dp"
                 tools:layout_editor_absoluteX="371dp"
                 tools:layout_editor_absoluteY="16dp" />
 
+            <ImageView
+                android:id="@+id/btnCamera"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="6dp"
+
+                app:srcCompat="@drawable/ic_camera_alt_black_24dp"
+                tools:layout_editor_absoluteX="371dp"
+                tools:layout_editor_absoluteY="16dp" />
         </Toolbar>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="531dp"
+            android:layout_height="524dp"
             android:layout_centerInParent="true"
             android:adjustViewBounds="true"
+            android:src="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@color/colorPrimary"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -61,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|center_horizontal|center_vertical"
-            android:text="Clique na área em verde para carregar uma imagem"
+            android:text="Clique na área em verde para carregar uma imagem da galeria"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
