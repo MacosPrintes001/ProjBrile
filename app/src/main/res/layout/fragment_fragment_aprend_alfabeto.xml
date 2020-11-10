@@ -9,7 +9,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_portait"
+    android:background="#fff"
     tools:context=".activities.aprendizagem.ActivityAprendizagem">
 
     <EditText
@@ -20,9 +20,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="32dp"
         android:layout_marginTop="32dp"
-        android:textColor="#fff"
         android:hint="Digite uma letra"
-        android:textColorHint="#ffffff"
         android:inputType="textPersonName"
         android:maxLength="1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +32,6 @@
 
     <GridView
         android:id="@+id/gridViewPalavra"
-        android:background="@drawable/bg_grid_view_aprendizagem"
         android:layout_width="0dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
