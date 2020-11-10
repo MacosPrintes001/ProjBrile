@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter3;
 
 
 public class FragmentAprendNumero extends Fragment {
@@ -41,7 +42,7 @@ public class FragmentAprendNumero extends Fragment {
         gridView = view.findViewById(R.id.gridViewPalavra);
         imagens.add(R.drawable.inicial_numerico);
         imagens.add(R.drawable.limpa);
-        GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
+        GridAdapter3 gridAdapter = new GridAdapter3(view.getContext(), imagens);
         gridView.setAdapter(gridAdapter);
         //ImageView para a número (Falta fazer)
         //Verifica a mudança dinamica dos dados
@@ -60,12 +61,14 @@ public class FragmentAprendNumero extends Fragment {
                 //Verifica se o EditText está vazio
                 if(letraInfor.getText().toString().isEmpty()){
                     imagens.clear();
-                    GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
+                    GridAdapter3 gridAdapter = new GridAdapter3(view.getContext(), imagens);
                     gridView.setAdapter(gridAdapter);
                 }
                 imagens.add(R.drawable.inicial_numerico);
                 int cont = 0;
+
                 while (cont < a.length){
+
                     switch (a[cont]){
                         case "0":
                             imagens.add(R.drawable.letra_j);
@@ -97,13 +100,16 @@ public class FragmentAprendNumero extends Fragment {
                         case "9":
                             imagens.add(R.drawable.letra_i);
                             break;
+                        case ".":
+                            imagens.add(R.drawable.virgula);
+                            break;
                         default:
                             imagens.add(R.drawable.limpa);
                             break;
                     }
                     cont += 1;
                 }
-                GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
+                GridAdapter3 gridAdapter = new GridAdapter3(view.getContext(), imagens);
                 gridView.setAdapter(gridAdapter);
             }
 

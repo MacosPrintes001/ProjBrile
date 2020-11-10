@@ -295,26 +295,6 @@ public class FragmentAprendPalavras extends Fragment {
                 }
                 GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
                 gridView.setAdapter(gridAdapter);
-                /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        switch (i){
-                            default:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                builder.setMessage("A célula clicada representa: " + a[i] + ".")
-                                        .setCancelable(true)
-                                        .setPositiveButton("Entendi", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.cancel();
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
-                                break;
-                        }
-                    }
-                });*/
             }
         });
 
