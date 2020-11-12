@@ -45,12 +45,14 @@ import java.util.Objects;
 
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.config.bdLetra;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CutActivity extends AppCompatActivity {
     private ImageView view;
     Uri image_uri;
     private final int CODE_IMAGE_GALERY = 1, IMAGE_CAPTURE_CODE = 2;
     private ImageView concluir, cancelar, camera;
+    private CircleImageView  imagem;
     private boolean escolhido = false;
     private Bitmap grayBitMap, imgBitMap;
     private String texto = " ";
@@ -109,6 +111,7 @@ public class CutActivity extends AppCompatActivity {
         concluir = findViewById(R.id.imagemConcluirEdition);
         cancelar = findViewById(R.id.imagemCancelEdition);
         camera = findViewById(R.id.btnCamera);
+        imagem = findViewById(R.id.imageView3);
         indicacao = findViewById(R.id.observacaoText);
     }
 
@@ -156,10 +159,10 @@ public class CutActivity extends AppCompatActivity {
         } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
             Uri imagemUriResultCrop = UCrop.getOutput(data);
             if (imagemUriResultCrop != null) {
-                view.setImageURI(imagemUriResultCrop);
+                imagem.setImageURI(imagemUriResultCrop);
                 try {
                     imgBitMap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagemUriResultCrop);
-                    indicacao.setText("");
+                    indicacao.setText("Imagem inserida!");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

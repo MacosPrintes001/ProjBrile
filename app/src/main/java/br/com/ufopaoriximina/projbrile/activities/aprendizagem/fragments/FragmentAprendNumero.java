@@ -14,7 +14,11 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.text.Format;
+import java.text.Normalizer;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;

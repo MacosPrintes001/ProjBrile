@@ -69,7 +69,7 @@
             android:background="@drawable/bg_btn_traduzir"
             android:enabled="false"
             android:text="@string/ouvir"
-            android:textColor="@color/colorAccent" />
+            android:textColor="#fff" />
 
         <Button
             android:id="@+id/button_send_tradu"
@@ -81,7 +81,7 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/bg_btn_traduzir"
             android:text="Enviar Tradução"
-            android:textColor="@color/colorAccent" />
+            android:textColor="#fff" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

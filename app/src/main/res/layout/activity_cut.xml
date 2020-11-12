@@ -44,19 +44,19 @@
 
         </Toolbar>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView3"
-            android:layout_width="280dp"
-            android:layout_height="256dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="32dp"
-            android:adjustViewBounds="true"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
             android:src="@drawable/circle_image"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/observacaoText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.211"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/observacaoText"
@@ -82,21 +82,21 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="0.559"
+            app:layout_constraintVertical_bias="0.556"
             app:srcCompat="@drawable/icon_cam" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="73dp"
             android:layout_height="54dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="56dp"
+            android:layout_marginEnd="36dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="0.559"
+            app:layout_constraintVertical_bias="0.556"
             app:srcCompat="@drawable/icon_upload" />
 
         <androidx.constraintlayout.widget.Guideline

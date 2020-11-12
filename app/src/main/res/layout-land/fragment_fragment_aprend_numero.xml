@@ -21,14 +21,14 @@ tools:context=".activities.aprendizagem.ActivityAprendizagem">
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="10dp"
         android:hint="Digite um número"
-        android:inputType="number|numberDecimal"
+        android:inputType="numberDecimal"
         android:maxLength="6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <GridView
         android:id="@+id/gridViewPalavra"
