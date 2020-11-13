@@ -222,7 +222,6 @@ public class CutActivity extends AppCompatActivity {
         //colors
         options.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         options.setToolbarColor(getResources().getColor(R.color.colorPrimary));
-
         options.setToolbarTitle("Recortar imagem");
         return options;
     }
