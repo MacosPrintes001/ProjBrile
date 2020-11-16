@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TelaCarregamento"
+        <activity android:name=".activities.ActivityConfirmacaoEdit"></activity>
+        <activity
+            android:name=".activities.TelaCarregamento"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,17 +27,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CutActivity" />
-        <activity android:name=".activities.aprendizagem.ActivityAprendizagem"/>
+        <activity android:name=".activities.aprendizagem.ActivityAprendizagem" />
         <activity
             android:name=".activities.ActivityEdicaoImagem"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.ActivityInicial"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
         <activity
-            android:name=".activities.translatedTexActivity"
+            android:name=".activities.ActivityInicial"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activities.TranslatedTexActivity"
             tools:ignore="ExtraText" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

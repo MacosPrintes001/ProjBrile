@@ -266,7 +266,7 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                 }
                 Utils.matToBitmap(grayMat, grayBitMap);
                 //set to the Imageview
-                Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
+                Intent intentEnviadora = new Intent(this, TranslatedTexActivity.class);
                 Bundle enviaTraducao = new Bundle();
                 enviaTraducao.putString("string_texto", texto);
                 intentEnviadora.putExtras(enviaTraducao);

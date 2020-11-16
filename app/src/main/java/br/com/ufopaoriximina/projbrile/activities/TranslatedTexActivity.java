@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +20,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import java.util.Locale;
 import br.com.ufopaoriximina.projbrile.R;
 
-public class translatedTexActivity extends AppCompatActivity {
+public class TranslatedTexActivity extends AppCompatActivity {
 
     private TextToSpeech mTTS;
     private TextView txtTraduced;
@@ -122,7 +121,7 @@ public class translatedTexActivity extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), CutActivity.class);
                         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
                                 , R.transition.fade_in, R.transition.fade_out);
-                        ActivityCompat.startActivity(translatedTexActivity.this, i, activityOptionsCompat.toBundle());
+                        ActivityCompat.startActivity(TranslatedTexActivity.this, i, activityOptionsCompat.toBundle());
                         finish();
 
                     }

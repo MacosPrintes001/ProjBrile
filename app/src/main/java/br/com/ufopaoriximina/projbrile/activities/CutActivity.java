@@ -51,11 +51,11 @@ public class CutActivity extends AppCompatActivity {
     private ImageView view;
     Uri image_uri;
     private final int CODE_IMAGE_GALERY = 1, IMAGE_CAPTURE_CODE = 2;
-    private ImageView concluir, cancelar, camera;
+    private ImageView  cancelar, camera;
     private CircleImageView  imagem;
     private boolean escolhido = false;
     private Bitmap grayBitMap, imgBitMap;
-    private String texto = " ";
+    private String texto = " ", textoToSend;
     private TextView indicacao;
 
     @Override
@@ -87,12 +87,12 @@ public class CutActivity extends AppCompatActivity {
                 checkExit();
             }
         });
-        concluir.setOnClickListener(new View.OnClickListener() {
+        /*concluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 traduzir();
             }
-        });
+        });*/
     }
 
     private void takePicture() {
@@ -108,7 +108,6 @@ public class CutActivity extends AppCompatActivity {
 
     private void init() {
         this.view = findViewById(R.id.imageView);
-        concluir = findViewById(R.id.imagemConcluirEdition);
         cancelar = findViewById(R.id.imagemCancelEdition);
         camera = findViewById(R.id.btnCamera);
         imagem = findViewById(R.id.imageView3);
@@ -159,10 +158,16 @@ public class CutActivity extends AppCompatActivity {
         } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
             Uri imagemUriResultCrop = UCrop.getOutput(data);
             if (imagemUriResultCrop != null) {
-                imagem.setImageURI(imagemUriResultCrop);
+                //imagem.setImageURI(imagemUriResultCrop);
                 try {
                     imgBitMap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagemUriResultCrop);
-                    indicacao.setText("Imagem inserida!");
+                    Intent i = new Intent(getApplicationContext(), ActivityConfirmacaoEdit.class);
+                    traduzir();
+                    i.putExtra("image", imagemUriResultCrop);
+                    i.putExtra("string_texto", textoToSend);
+                    ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.transition.fade_in, R.transition.fade_out);
+                    ActivityCompat.startActivity(CutActivity.this, i, activityOptionsCompat.toBundle());
+                    finish();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -389,12 +394,7 @@ public class CutActivity extends AppCompatActivity {
 //        }
 //    }
 //}
-                Intent intentEnviadora = new Intent(this, translatedTexActivity.class);
-                Bundle enviaTraducao = new Bundle();
-                enviaTraducao.putString("string_texto", String.valueOf(texto));
-                intentEnviadora.putExtras(enviaTraducao);
-                startActivity(intentEnviadora);
-                finish();
+                textoToSend = texto.toString();
             }
         } catch (Exception e) {
             Log.d("Erro", Objects.requireNonNull(e.getMessage()));
