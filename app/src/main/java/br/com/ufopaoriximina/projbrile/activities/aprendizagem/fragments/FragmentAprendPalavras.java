@@ -288,7 +288,114 @@ public class FragmentAprendPalavras extends Fragment {
                         case "!":
                             imagens.add(R.drawable.exclamacao);
                             break;
+                        //Acentuadas
+                        case "á":
+                            imagens.add(R.drawable.a_agudo);
+                            break;
+                        case "Á":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.a_agudo);
+                            break;
+                        case "â":
+                            imagens.add(R.drawable.a_circunflexo);
+                            break;
+                        case "Â":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.a_circunflexo);
+                            break;
+                        case "à":
+                            imagens.add(R.drawable.a_crase);
+                            break;
+                        case "À":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.a_crase);
+                            break;
+                        case "ã":
+                            imagens.add(R.drawable.a_til);
+                            break;
+                        case "Ã":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.a_til);
+                            break;
+                        case "é":
+                            imagens.add(R.drawable.e_agudo);
+                            break;
+                        case "É":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.e_agudo);
+                            break;
+                        case "ê":
+                            imagens.add(R.drawable.e_circunflexo);
+                            break;
+                        case "Ê":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.e_circunflexo);
+                            break;
+                        case "è":
+                            imagens.add(R.drawable.e_crase);
+                            break;
+                        case "È":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.e_crase);
+                            break;
+                        case "í":
+                            imagens.add(R.drawable.i_agudo);
+                            break;
+                        case "Í":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.i_agudo);
+                            break;
+                        case "ì":
+                            imagens.add(R.drawable.i_crase);
+                            break;
+                        case "Ì":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.i_crase);
+                            break;
+                        case "ó":
+                            imagens.add(R.drawable.o_agudo);
+                            break;
+                        case "Ó":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.o_agudo);
+                            break;
+                        case "ô":
+                            imagens.add(R.drawable.o_circunflexo);
+                            break;
+                        case "Ô":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.o_circunflexo);
+                            break;
+                        case "ò":
+                            imagens.add(R.drawable.o_crase);
+                            break;
+                        case "Ò":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.o_crase);
+                            break;
+                        case "õ":
+                            imagens.add(R.drawable.o_til);
+                            break;
+                        case "Õ":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.o_til);
+                            break;
+                        case "ú":
+                            imagens.add(R.drawable.u_agudo);
+                            break;
+                        case "Ú":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.u_agudo);
+                            break;
+                        case "ù":
+                            imagens.add(R.drawable.u_crase);
+                            break;
+                        case "Ù":
+                            imagens.add(R.drawable.inicial_maiuscula);
+                            imagens.add(R.drawable.u_crase);
+                            break;
                         default:
+                            imagens.add(R.drawable.limpa);
                             break;
                     }
                     cont += 1;

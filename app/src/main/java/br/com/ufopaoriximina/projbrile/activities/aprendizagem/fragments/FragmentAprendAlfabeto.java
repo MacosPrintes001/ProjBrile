@@ -304,6 +304,142 @@ public class FragmentAprendAlfabeto extends Fragment {
                         imagens.add(R.drawable.inicial_maiuscula);
                         imagens.add(R.drawable.letra_z);
                         break;
+                    //Acentuadas
+                    case "á":
+                        imagens.clear();
+                        imagens.add(R.drawable.a_agudo);
+                        break;
+                    case "Á":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.a_agudo);
+                        break;
+                    case "â":
+                        imagens.clear();
+                        imagens.add(R.drawable.a_circunflexo);
+                        break;
+                    case "Â":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.a_circunflexo);
+                        break;
+                    case "à":
+                        imagens.clear();
+                        imagens.add(R.drawable.a_crase);
+                        break;
+                    case "À":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.a_crase);
+                        break;
+                    case "ã":
+                        imagens.clear();
+                        imagens.add(R.drawable.a_til);
+                        break;
+                    case "Ã":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.a_til);
+                        break;
+                    case "é":
+                        imagens.clear();
+                        imagens.add(R.drawable.e_agudo);
+                        break;
+                    case "É":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.e_agudo);
+                        break;
+                    case "ê":
+                        imagens.clear();
+                        imagens.add(R.drawable.e_circunflexo);
+                        break;
+                    case "Ê":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.e_circunflexo);
+                        break;
+                    case "è":
+                        imagens.clear();
+                        imagens.add(R.drawable.e_crase);
+                        break;
+                    case "È":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.e_crase);
+                        break;
+                    case "í":
+                        imagens.clear();
+                        imagens.add(R.drawable.i_agudo);
+                        break;
+                    case "Í":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.i_agudo);
+                        break;
+                    case "ì":
+                        imagens.clear();
+                        imagens.add(R.drawable.i_crase);
+                        break;
+                    case "Ì":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.i_crase);
+                        break;
+                    case "ó":
+                        imagens.clear();
+                        imagens.add(R.drawable.o_agudo);
+                        break;
+                    case "Ó":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.o_agudo);
+                        break;
+                    case "ô":
+                        imagens.clear();
+                        imagens.add(R.drawable.o_circunflexo);
+                        break;
+                    case "Ô":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.o_circunflexo);
+                        break;
+                    case "ò":
+                        imagens.clear();
+                        imagens.add(R.drawable.o_crase);
+                        break;
+                    case "Ò":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.o_crase);
+                        break;
+                    case "õ":
+                        imagens.clear();
+                        imagens.add(R.drawable.o_til);
+                        break;
+                    case "Õ":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.o_til);
+                        break;
+                    case "ú":
+                        imagens.clear();
+                        imagens.add(R.drawable.u_agudo);
+                        break;
+                    case "Ú":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.u_agudo);
+                        break;
+                    case "ù":
+                        imagens.clear();
+                        imagens.add(R.drawable.u_crase);
+                        break;
+                    case "Ù":
+                        imagens.clear();
+                        imagens.add(R.drawable.inicial_maiuscula);
+                        imagens.add(R.drawable.u_crase);
+                        break;
                     default:
                         imagens.clear();
                         imagens.add(R.drawable.limpa);
