@@ -105,6 +105,15 @@ public class FragmentAprendNumero extends Fragment {
                             imagens.add(R.drawable.letra_i);
                             break;
                         case ".":
+                            a[cont] = ",";
+                            String var = "";
+                            for (i=0; i<=a.length-1; i++){
+                                var += a[i];
+                            }
+                            letraInfor.setText(var);
+                            letraInfor.setSelection(letraInfor.length());
+                            break;
+                        case ",":
                             imagens.add(R.drawable.virgula);
                             break;
                         default:
@@ -115,6 +124,7 @@ public class FragmentAprendNumero extends Fragment {
                 }
                 GridAdapter3 gridAdapter = new GridAdapter3(view.getContext(), imagens);
                 gridView.setAdapter(gridAdapter);
+                //letraInfor.setText(a.toString());
             }
 
             @Override
