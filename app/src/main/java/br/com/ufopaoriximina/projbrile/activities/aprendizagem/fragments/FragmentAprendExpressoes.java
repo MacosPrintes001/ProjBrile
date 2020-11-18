@@ -529,7 +529,7 @@ public class FragmentAprendExpressoes extends Fragment {
                                 break;
                         }
                     }else {
-                        imagens.add(R.drawable.limpa);
+                        //imagens.add(R.drawable.limpa);
                     }
                     cont += 1;
                 }

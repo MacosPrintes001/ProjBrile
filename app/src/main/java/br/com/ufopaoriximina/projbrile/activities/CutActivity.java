@@ -51,12 +51,12 @@ public class CutActivity extends AppCompatActivity {
     private ImageView view;
     Uri image_uri;
     private final int CODE_IMAGE_GALERY = 1, IMAGE_CAPTURE_CODE = 2;
-    private ImageView  cancelar, camera;
+    private ImageView  camera;
     private CircleImageView  imagem;
     private boolean escolhido = false;
     private Bitmap grayBitMap, imgBitMap;
     private String texto = " ", textoToSend;
-    private TextView indicacao;
+    private TextView indicacao, cancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +87,7 @@ public class CutActivity extends AppCompatActivity {
                 checkExit();
             }
         });
-        /*concluir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                traduzir();
-            }
-        });*/
+
     }
 
     private void takePicture() {
@@ -108,7 +103,7 @@ public class CutActivity extends AppCompatActivity {
 
     private void init() {
         this.view = findViewById(R.id.imageView);
-        cancelar = findViewById(R.id.imagemCancelEdition);
+        cancelar = findViewById(R.id.textCancelar);
         camera = findViewById(R.id.btnCamera);
         imagem = findViewById(R.id.imageView3);
         indicacao = findViewById(R.id.observacaoText);

@@ -16,22 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imagemCancelEdition"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="4dp"
-            app:srcCompat="@drawable/ic_cancel_black_24dp"
-            tools:layout_editor_absoluteX="371dp"
-            tools:layout_editor_absoluteY="16dp" />
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:textColor="#fff"
-            android:layout_marginStart="15dp"
-            android:textSize="20dp"/>
+        android:id="@+id/textCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:textColor="#fff"
+        android:layout_marginStart="15dp"
+        android:textSize="20dp"/>
 
     </Toolbar>
     <LinearLayout
