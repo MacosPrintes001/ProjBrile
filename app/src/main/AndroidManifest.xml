@@ -27,7 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CutActivity" />
-        <activity android:name=".activities.aprendizagem.ActivityAprendizagem" />
+        <activity android:name=".activities.aprendizagem.ActivityAprendizagem"
+            android:configChanges="screenSize|keyboardHidden"
+            />
         <activity
             android:name=".activities.ActivityEdicaoImagem"
             android:screenOrientation="portrait" />

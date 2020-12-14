@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import java.util.Arrays;
 
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.ImagensAdapter;
 
 public class FragmentAprendPalavras extends Fragment {
 
@@ -41,21 +45,23 @@ public class FragmentAprendPalavras extends Fragment {
     private ImageView clearAll;
     //EditText da palavra
     EditText editPalavra;
+    RecyclerView recyclerImagens;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        //TODO: ESSA QUE ESTÁ COM PROBLEMAS GRAVES
-
-
         //Recupera o View
         final View view = inflater.inflate(R.layout.fragment_fragment_aprend_palavras, container, false);
         //Recupera Buttons
         clearAll = view.findViewById(R.id.apagarAll);
         traduzir = view.findViewById(R.id.button_send_tradu);
         //Criação da Grid View (Pesquisar)
-        gridView = view.findViewById(R.id.gridViewPalavra);
+        recyclerImagens  = view.findViewById(R.id.recyclerViewPalavras);
+        //Definir Layout
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        recyclerImagens.setLayoutManager(layoutManager);
+        //Definir adapter
+        ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+        recyclerImagens.setAdapter(imagensAdapter);
         //Localização do ediText
         editPalavra = view.findViewById(R.id.textoInformacao);
         //Recuperação das mudanças dinâmicas dos dados
@@ -65,8 +71,8 @@ public class FragmentAprendPalavras extends Fragment {
             public void onClick(View view) {
                 editPalavra.setText(null);
                 imagens.clear();
-                GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-                gridView.setAdapter(gridAdapter);
+                ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+                recyclerImagens.setAdapter(imagensAdapter);
             }
         });
         traduzir.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +84,8 @@ public class FragmentAprendPalavras extends Fragment {
                 //Verifica se o EditText está vazio
                 if(editPalavra.getText().toString().isEmpty()){
                     imagens.clear();
-                    GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-                    gridView.setAdapter(gridAdapter);
+                    ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+                    recyclerImagens.setAdapter(imagensAdapter);
                 }
 
                 int cont = 0;
@@ -400,14 +406,12 @@ public class FragmentAprendPalavras extends Fragment {
                     }
                     cont += 1;
                 }
-                GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-                gridView.setAdapter(gridAdapter);
+                ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+                recyclerImagens.setAdapter(imagensAdapter);
             }
         });
 
         //Recupera e configura o GridAdapter usando a classe aprendizagem.adapters.GridAdapter
-        GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-        gridView.setAdapter(gridAdapter);
         return view;
     }
 

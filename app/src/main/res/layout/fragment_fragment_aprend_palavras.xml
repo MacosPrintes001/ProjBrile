@@ -17,31 +17,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:hint="Digite uma palavra ou texto"
         android:inputType="textLongMessage|textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/apagarAll"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra" />
 
-    <GridView
-        android:id="@+id/gridViewPalavra"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginTop="70dp"
-        android:gravity="center_vertical|center_horizontal|center"
-        android:nestedScrollingEnabled="true"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:scrollbarSize="2dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:verticalSpacing="15dp"
-        android:columnWidth="35dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPalavras" />
 
     <ImageView
         android:id="@+id/apagarAll"
@@ -72,6 +54,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoInformacao"
         app:layout_constraintVertical_bias="0.0" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPalavras"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
