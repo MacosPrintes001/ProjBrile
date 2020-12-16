@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +25,11 @@ import java.util.ArrayList;
 import br.com.ufopaoriximina.projbrile.R;
 import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter;
 import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.GridAdapter3;
+import br.com.ufopaoriximina.projbrile.activities.aprendizagem.adapters.ImagensAdapter;
 
 
 public class FragmentAprendExpressoes extends Fragment {
 
-    private GridView gridView;
     public FragmentAprendExpressoes() {
         // Required empty public constructor
     }
@@ -40,6 +42,8 @@ public class FragmentAprendExpressoes extends Fragment {
     private ImageView clearAll;
     //EditText da palavra
     EditText editPalavra;
+    //Recycler
+    RecyclerView recyclerImagens;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,8 +56,14 @@ public class FragmentAprendExpressoes extends Fragment {
         //Recupera Buttons
         clearAll = view.findViewById(R.id.apagarAll);
         traduzir = view.findViewById(R.id.button_send_tradu);
-        //Criação da Grid View (Pesquisar)
-        gridView = view.findViewById(R.id.gridViewPalavra);
+        ///Criação da Grid View (Pesquisar)
+        recyclerImagens  = view.findViewById(R.id.recyclerViewPalavras);
+        //Definir Layout
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        recyclerImagens.setLayoutManager(layoutManager);
+        //Definir adapter
+        ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+        recyclerImagens.setAdapter(imagensAdapter);
         //Localização do ediText
         editPalavra = view.findViewById(R.id.textoInformacao);
         //Recuperação das mudanças dinâmicas dos dados
@@ -63,8 +73,8 @@ public class FragmentAprendExpressoes extends Fragment {
             public void onClick(View view) {
                 editPalavra.setText(null);
                 imagens.clear();
-                GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-                gridView.setAdapter(gridAdapter);
+                ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+                recyclerImagens.setAdapter(imagensAdapter);
             }
         });
         traduzir.setOnClickListener(new View.OnClickListener() {
@@ -72,43 +82,43 @@ public class FragmentAprendExpressoes extends Fragment {
             public void onClick(View view) {
                 imagens.clear();
                 //Tentativa de organizar um array de letras
-                final String[] a =  editPalavra.getText().toString().split("");
+                final String[] a = editPalavra.getText().toString().split("");
                 //Verifica se o EditText está vazio
-                if(editPalavra.getText().toString().isEmpty()){
+                if (editPalavra.getText().toString().isEmpty()) {
                     imagens.clear();
-                    GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-                    gridView.setAdapter(gridAdapter);
+                    ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+                    recyclerImagens.setAdapter(imagensAdapter);
                 }
 
                 int cont = 0;
-                while (cont < a.length){
+                while (cont < a.length) {
                     if (a[cont].equalsIgnoreCase("a") ||
                             a[cont].equalsIgnoreCase("b") ||
-                            a[cont].equalsIgnoreCase("c")||
-                            a[cont].equalsIgnoreCase("d")||
-                            a[cont].equalsIgnoreCase("e")||
-                            a[cont].equalsIgnoreCase("f")||
-                            a[cont].equalsIgnoreCase("g")||
-                            a[cont].equalsIgnoreCase("h")||
-                            a[cont].equalsIgnoreCase("i")||
-                            a[cont].equalsIgnoreCase("j")||
-                            a[cont].equalsIgnoreCase("k")||
-                            a[cont].equalsIgnoreCase("l")||
-                            a[cont].equalsIgnoreCase("m")||
-                            a[cont].equalsIgnoreCase("n")||
-                            a[cont].equalsIgnoreCase("o")||
-                            a[cont].equalsIgnoreCase("p")||
-                            a[cont].equalsIgnoreCase("q")||
-                            a[cont].equalsIgnoreCase("r")||
-                            a[cont].equalsIgnoreCase("s")||
-                            a[cont].equalsIgnoreCase("t")||
-                            a[cont].equalsIgnoreCase("u")||
-                            a[cont].equalsIgnoreCase("v")||
-                            a[cont].equalsIgnoreCase("x")||
-                            a[cont].equalsIgnoreCase("w")||
-                            a[cont].equalsIgnoreCase("y")||
-                            a[cont].equalsIgnoreCase("z")){
-                        switch (a[cont]){
+                            a[cont].equalsIgnoreCase("c") ||
+                            a[cont].equalsIgnoreCase("d") ||
+                            a[cont].equalsIgnoreCase("e") ||
+                            a[cont].equalsIgnoreCase("f") ||
+                            a[cont].equalsIgnoreCase("g") ||
+                            a[cont].equalsIgnoreCase("h") ||
+                            a[cont].equalsIgnoreCase("i") ||
+                            a[cont].equalsIgnoreCase("j") ||
+                            a[cont].equalsIgnoreCase("k") ||
+                            a[cont].equalsIgnoreCase("l") ||
+                            a[cont].equalsIgnoreCase("m") ||
+                            a[cont].equalsIgnoreCase("n") ||
+                            a[cont].equalsIgnoreCase("o") ||
+                            a[cont].equalsIgnoreCase("p") ||
+                            a[cont].equalsIgnoreCase("q") ||
+                            a[cont].equalsIgnoreCase("r") ||
+                            a[cont].equalsIgnoreCase("s") ||
+                            a[cont].equalsIgnoreCase("t") ||
+                            a[cont].equalsIgnoreCase("u") ||
+                            a[cont].equalsIgnoreCase("v") ||
+                            a[cont].equalsIgnoreCase("x") ||
+                            a[cont].equalsIgnoreCase("w") ||
+                            a[cont].equalsIgnoreCase("y") ||
+                            a[cont].equalsIgnoreCase("z")) {
+                        switch (a[cont]) {
                             case "a":
                                 imagens.add(R.drawable.letra_a);
                                 break;
@@ -398,63 +408,63 @@ public class FragmentAprendExpressoes extends Fragment {
                                 imagens.add(R.drawable.u_crase);
                                 break;
                         }
-                    }else if (a[cont].equals("1") ||
+                    } else if (a[cont].equals("1") ||
                             a[cont].equals("2") ||
-                            a[cont].equals("3")||
-                            a[cont].equals("4")||
-                            a[cont].equals("5")||
-                            a[cont].equals("6")||
-                            a[cont].equals("7")||
-                            a[cont].equals("8")||
-                            a[cont].equals("9")||
-                            a[cont].equals("0")){
-                        if(cont >= 1){
-                            if (a[cont-1].equalsIgnoreCase(" " )||
-                                    a[cont-1].equalsIgnoreCase("a")||
-                                    a[cont-1].equalsIgnoreCase("b")||
-                                    a[cont-1].equalsIgnoreCase("c")||
-                                    a[cont-1].equalsIgnoreCase("d")||
-                                    a[cont-1].equalsIgnoreCase("e")||
-                                    a[cont-1].equalsIgnoreCase("f")||
-                                    a[cont-1].equalsIgnoreCase("g")||
-                                    a[cont-1].equalsIgnoreCase("h")||
-                                    a[cont-1].equalsIgnoreCase("i")||
-                                    a[cont-1].equalsIgnoreCase("j")||
-                                    a[cont-1].equalsIgnoreCase("k")||
-                                    a[cont-1].equalsIgnoreCase("l")||
-                                    a[cont-1].equalsIgnoreCase("m")||
-                                    a[cont-1].equalsIgnoreCase("n")||
-                                    a[cont-1].equalsIgnoreCase("o")||
-                                    a[cont-1].equalsIgnoreCase("p")||
-                                    a[cont-1].equalsIgnoreCase("q")||
-                                    a[cont-1].equalsIgnoreCase("r")||
-                                    a[cont-1].equalsIgnoreCase("s")||
-                                    a[cont-1].equalsIgnoreCase("t")||
-                                    a[cont-1].equalsIgnoreCase("u")||
-                                    a[cont-1].equalsIgnoreCase("v")||
-                                    a[cont-1].equalsIgnoreCase("x")||
-                                    a[cont-1].equalsIgnoreCase("w")||
-                                    a[cont-1].equalsIgnoreCase("y")||
-                                    a[cont-1].equalsIgnoreCase("z")||
-                                    a[cont-1].equalsIgnoreCase("+") ||
-                                    a[cont-1].equalsIgnoreCase("-") ||
-                                    a[cont-1].equalsIgnoreCase("*")||
-                                    a[cont-1].equalsIgnoreCase("/")||
-                                    a[cont-1].equalsIgnoreCase("^")||
-                                    a[cont-1].equalsIgnoreCase("(")||
-                                    a[cont-1].equalsIgnoreCase(")")||
-                                    a[cont-1].equalsIgnoreCase("=")||
-                                    a[cont-1].equalsIgnoreCase(",")||
-                                    a[cont-1].equalsIgnoreCase(".")
-                            ){
+                            a[cont].equals("3") ||
+                            a[cont].equals("4") ||
+                            a[cont].equals("5") ||
+                            a[cont].equals("6") ||
+                            a[cont].equals("7") ||
+                            a[cont].equals("8") ||
+                            a[cont].equals("9") ||
+                            a[cont].equals("0")) {
+                        if (cont >= 1) {
+                            if (a[cont - 1].equalsIgnoreCase(" ") ||
+                                    a[cont - 1].equalsIgnoreCase("a") ||
+                                    a[cont - 1].equalsIgnoreCase("b") ||
+                                    a[cont - 1].equalsIgnoreCase("c") ||
+                                    a[cont - 1].equalsIgnoreCase("d") ||
+                                    a[cont - 1].equalsIgnoreCase("e") ||
+                                    a[cont - 1].equalsIgnoreCase("f") ||
+                                    a[cont - 1].equalsIgnoreCase("g") ||
+                                    a[cont - 1].equalsIgnoreCase("h") ||
+                                    a[cont - 1].equalsIgnoreCase("i") ||
+                                    a[cont - 1].equalsIgnoreCase("j") ||
+                                    a[cont - 1].equalsIgnoreCase("k") ||
+                                    a[cont - 1].equalsIgnoreCase("l") ||
+                                    a[cont - 1].equalsIgnoreCase("m") ||
+                                    a[cont - 1].equalsIgnoreCase("n") ||
+                                    a[cont - 1].equalsIgnoreCase("o") ||
+                                    a[cont - 1].equalsIgnoreCase("p") ||
+                                    a[cont - 1].equalsIgnoreCase("q") ||
+                                    a[cont - 1].equalsIgnoreCase("r") ||
+                                    a[cont - 1].equalsIgnoreCase("s") ||
+                                    a[cont - 1].equalsIgnoreCase("t") ||
+                                    a[cont - 1].equalsIgnoreCase("u") ||
+                                    a[cont - 1].equalsIgnoreCase("v") ||
+                                    a[cont - 1].equalsIgnoreCase("x") ||
+                                    a[cont - 1].equalsIgnoreCase("w") ||
+                                    a[cont - 1].equalsIgnoreCase("y") ||
+                                    a[cont - 1].equalsIgnoreCase("z") ||
+                                    a[cont - 1].equalsIgnoreCase("+") ||
+                                    a[cont - 1].equalsIgnoreCase("-") ||
+                                    a[cont - 1].equalsIgnoreCase("*") ||
+                                    a[cont - 1].equalsIgnoreCase("/") ||
+                                    a[cont - 1].equalsIgnoreCase("^") ||
+                                    a[cont - 1].equalsIgnoreCase("(") ||
+                                    a[cont - 1].equalsIgnoreCase(")") ||
+                                    a[cont - 1].equalsIgnoreCase("=") ||
+                                    a[cont - 1].equalsIgnoreCase(",") ||
+                                    a[cont - 1].equalsIgnoreCase(".")
+                            ) {
                                 imagens.add(R.drawable.inicial_numerico);
                             }
-                        }else{
+                        } else {
                             imagens.add(R.drawable.inicial_numerico);
                         }
 
 
-                        switch (a[cont]){
+                        switch (a[cont]) {
                             case "0":
                                 imagens.add(R.drawable.letra_j);
                                 break;
@@ -486,17 +496,17 @@ public class FragmentAprendExpressoes extends Fragment {
                                 imagens.add(R.drawable.letra_i);
                                 break;
                         }
-                    }else if(a[cont].equalsIgnoreCase("+") ||
+                    } else if (a[cont].equalsIgnoreCase("+") ||
                             a[cont].equalsIgnoreCase("-") ||
-                            a[cont].equalsIgnoreCase("*")||
-                            a[cont].equalsIgnoreCase("/")||
-                            a[cont].equalsIgnoreCase("^")||
-                            a[cont].equalsIgnoreCase("(")||
-                            a[cont].equalsIgnoreCase(")")||
-                            a[cont].equalsIgnoreCase("=")||
-                            a[cont].equalsIgnoreCase(",")||
-                            a[cont].equalsIgnoreCase(".")){
-                        switch (a[cont]){
+                            a[cont].equalsIgnoreCase("*") ||
+                            a[cont].equalsIgnoreCase("/") ||
+                            a[cont].equalsIgnoreCase("^") ||
+                            a[cont].equalsIgnoreCase("(") ||
+                            a[cont].equalsIgnoreCase(")") ||
+                            a[cont].equalsIgnoreCase("=") ||
+                            a[cont].equalsIgnoreCase(",") ||
+                            a[cont].equalsIgnoreCase(".")) {
+                        switch (a[cont]) {
                             case "+":
                                 imagens.add(R.drawable.soma);
                                 break;
@@ -528,14 +538,14 @@ public class FragmentAprendExpressoes extends Fragment {
                                 imagens.add(R.drawable.milhar);
                                 break;
                         }
-                    }else {
+                    } else {
                         //imagens.add(R.drawable.limpa);
                     }
                     cont += 1;
                 }
-                GridAdapter gridAdapter = new GridAdapter(view.getContext(), imagens);
-                gridView.setAdapter(gridAdapter);
-                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                ImagensAdapter imagensAdapter = new ImagensAdapter(imagens);
+                recyclerImagens.setAdapter(imagensAdapter);
+                /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         switch (i){
@@ -721,13 +731,9 @@ public class FragmentAprendExpressoes extends Fragment {
                                 break;
                         }
                     }
-                });
+                });*/
             }
         });
-
-        //Recupera e configura o GridAdapter usando a classe aprendizagem.adapters.GridAdapter
-        GridAdapter3 gridAdapter = new GridAdapter3(view.getContext(), imagens);
-        gridView.setAdapter(gridAdapter);
         return view;
     }
 

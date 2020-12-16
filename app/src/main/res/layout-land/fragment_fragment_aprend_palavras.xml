@@ -11,37 +11,31 @@
         android:layout_height="match_parent"
         android:background="#fff"
         tools:context=".activities.aprendizagem.fragments.FragmentAprendPalavras">
-    <EditText
-        android:id="@+id/textoInformacao"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32sp"
-        android:layout_marginTop="50dp"
-        android:hint="Digite uma palavra ou texto"
-        android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/apagarAll"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra" />
+
+        <EditText
+            android:id="@+id/textoInformacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32sp"
+            android:hint="Digite uma palavra ou texto"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@+id/apagarAll"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPalavras" />
 
 
-            <GridView
-                android:id="@+id/gridViewPalavra"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="32dp"
-                android:columnWidth="50dp"
-                android:gravity="center_vertical|center_horizontal|center"
-                android:horizontalSpacing="8dp"
-                android:nestedScrollingEnabled="true"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPalavras"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/apagarAll"
         android:layout_width="wrap_content"
@@ -54,22 +48,23 @@
         app:layout_constraintStart_toEndOf="@+id/textoInformacao"
         app:layout_constraintTop_toTopOf="@+id/textoInformacao" />
 
-    <Button
-        android:id="@+id/button_send_tradu"
-        android:layout_width="319dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="54dp"
-        android:background="@drawable/bg_btn_traduzir"
-        android:text="Ver em Braile"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoInformacao"
-        app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/button_send_tradu"
+            android:layout_width="319dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="54dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_btn_traduzir"
+            android:text="Ver em Braile"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textoInformacao"
+            app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

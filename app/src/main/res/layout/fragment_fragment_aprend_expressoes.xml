@@ -22,23 +22,18 @@
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/apagarAll"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridViewPalavra" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPalavras" />
 
-    <GridView
-        android:id="@+id/gridViewPalavra"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPalavras"
         android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="32dp"
-        android:columnWidth="50dp"
-        android:gravity="center_vertical|center_horizontal|center"
-        android:nestedScrollingEnabled="true"
-        android:horizontalSpacing="8dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +57,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="54dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/bg_btn_traduzir"
         android:text="Ver em Braile"
         android:textColor="#fff"
