@@ -43,8 +43,9 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
     private ImageView img;
     private ImageView concluir, cancelar;
     private boolean escolhido = false;
-    private Bitmap grayBitMap, imgBitMap;
+    private Bitmap imgBitMap;
     private String texto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
         OpenCVLoader.initDebug();
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON_TOUCH)
-                .setAspectRatio(1,1)
+                .setAspectRatio(1, 1)
                 .setAllowFlipping(true)
                 .setActivityTitle("Editar Imagem")
                 .setAutoZoomEnabled(true)
@@ -74,14 +75,15 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
         concluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imgBitMap == null){
+                if (imgBitMap == null) {
                     imagemVazia();
-                }else{
+                } else {
                     convertImage();
                 }
             }
         });
     }
+    //O ERRO ESTÁ POR AQUI
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -95,21 +97,20 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 Exception error = result.getError();
             }
         }
     }
 
-    private void checkExit(){
+    private void checkExit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Deseja realmente cancelar a edição?")
                 .setCancelable(false)
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent i = new Intent(getApplicationContext(),ActivityInicial.class);
+                        Intent i = new Intent(getApplicationContext(), ActivityInicial.class);
                         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext()
                                 , R.transition.fade_in, R.transition.fade_out);
                         ActivityCompat.startActivity(ActivityEdicaoImagem.this, i, activityOptionsCompat.toBundle());
@@ -124,17 +125,18 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-    private void init(){
+
+    private void init() {
         this.img = findViewById(R.id.view);
         cancelar = findViewById(R.id.imagemCancelEdition);
         concluir = findViewById(R.id.imagemConcluirEdition);
     }
 
-    public void convertImage(){
+    public void convertImage() {
         try {
-            if(imgBitMap == null){
+            if (imgBitMap == null) {
                 Toast.makeText(getApplicationContext(), "ImageView esta vazio, por favor selecione uma imagem", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 Mat Rgba = new Mat();
                 Mat grayMat = new Mat();
 
@@ -145,7 +147,7 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                 int width = imgBitMap.getWidth();
                 int height = imgBitMap.getHeight();
 
-                grayBitMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                Bitmap grayBitMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
 
                 //BitMap to mat
                 Utils.bitmapToMat(imgBitMap, Rgba);
@@ -159,6 +161,9 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                 //Median Filter(Filtro de Mediana/Morfologia)
                 Imgproc.medianBlur(grayMat, grayMat, 3);
 
+
+                Utils.matToBitmap(grayMat, grayBitMap);
+                img.setImageBitmap(grayBitMap);
                 //Erode
                 Imgproc.erode(grayMat, grayMat, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(1, 2)));
 
@@ -229,6 +234,9 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                     }
                 }
 
+                Utils.matToBitmap(grayMat, grayBitMap);
+                img.setImageBitmap(grayBitMap);
+
                 //Recognition of word
                 String flag = "0";
 
@@ -260,7 +268,7 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
 
                         bdLetra carac = new bdLetra();
                         String[] letra = carac.letraBD(Vletra, flag);
-                        texto = texto+letra[0];
+                        texto = texto + letra[0];
                         flag = letra[1];
                     }
                 }
@@ -273,12 +281,12 @@ public class ActivityEdicaoImagem extends AppCompatActivity {
                 startActivity(intentEnviadora);
                 finish();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("Erro", e.getMessage());
         }
     }
 
-    private void imagemVazia(){
+    private void imagemVazia() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Você não selecionou nenhum imagem!");
         builder.setCancelable(false);
